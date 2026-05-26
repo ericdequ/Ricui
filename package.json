@@ -9,6 +9,6 @@
   ],
   "scripts": {
     "check:imports": "node ./scripts/verify-imports.mjs",
-    "test": "npm run check:imports"
+    "test": "node ./scripts/verify-imports.mjs"
   }
 }
