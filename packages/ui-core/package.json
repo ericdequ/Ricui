@@ -1,9 +1,16 @@
 {
   "name": "@ric/ui-core",
   "version": "0.1.0",
+  "description": "Shared component contracts and accessibility baseline for all RIC projects",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js"
+  },
+  "keywords": ["ric", "ui", "components", "accessibility", "design-system"],
+  "license": "MIT",
+  "files": ["src"],
+  "publishConfig": {
+    "access": "public"
   }
 }

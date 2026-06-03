@@ -1,9 +1,16 @@
 {
   "name": "@ric/emoji",
   "version": "0.1.0",
+  "description": "Unicode emoji catalog used as semantic icons across all RIC projects",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js"
+  },
+  "keywords": ["ric", "emoji", "icons", "semantic", "unicode"],
+  "license": "MIT",
+  "files": ["src"],
+  "publishConfig": {
+    "access": "public"
   }
 }
