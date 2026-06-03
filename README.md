@@ -10,6 +10,10 @@ Unified UI and iconography workspace for RIC projects.
 - `@ric/emoji` — unicode emoji catalog used as semantic icons
 - `@ric/ui` — single import entrypoint for all shared modules
 
+Additional map package:
+
+- `@ric/map-ui` - shared map UI families, glyph hierarchy, legends, actions, and panel contracts
+
 ## Getting started
 
 ```bash

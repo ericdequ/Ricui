@@ -2,7 +2,7 @@
 
 | Project | Status | UI inventory | Token usage | Icon usage | Emoji usage | Duplicates found | Proposed `@ric/*` mapping |
 |---|---|---|---|---|---|---|---|
-| bev | in-progress (pilot) | pending capture | pending capture | pending capture | pending capture | pending capture | pending mapping |
+| bev | in-progress (pilot) | map shell, panels, legends, action buttons | shared tokens via `@ric/ui` target | map/icon actions to `@ric/icons` | map family and subtype glyphs in `@ric/map-ui` | local BEV map chrome and glyph registries | migrate reusable map UI contracts to `@ric/map-ui` |
 | blogs | queued | pending | pending | pending | pending | pending | pending |
 | ric | queued | pending | pending | pending | pending | pending | pending |
 | legalet | queued | pending | pending | pending | pending | pending | pending |

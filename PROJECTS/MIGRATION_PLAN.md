@@ -18,3 +18,4 @@
 - Use Changesets for versioning policy.
 - Publish `@ric/*` to npm.
 - Track app migration status in `PROJECTS/AUDIT_MATRIX.md`.
+- Move shared map UI families, legends, glyph hierarchy, and action contracts into `@ric/map-ui`.

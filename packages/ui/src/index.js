@@ -1,4 +1,5 @@
-export { tokens } from '@ric/ui-tokens';
-export { components, accessibilityBaseline } from '@ric/ui-core';
-export { iconography } from '@ric/icons';
-export { emojiCatalog, getEmoji } from '@ric/emoji';
+export { tokens } from '../../ui-tokens/src/index.js';
+export { components, accessibilityBaseline } from '../../ui-core/src/index.js';
+export { iconography } from '../../icons/src/index.js';
+export { emojiCatalog, getEmoji } from '../../emoji/src/index.js';
+export * from '../../map-ui/src/index.js';

@@ -9,6 +9,7 @@
   "dependencies": {
     "@ric/emoji": "0.1.0",
     "@ric/icons": "0.1.0",
+    "@ric/map-ui": "0.1.0",
     "@ric/ui-core": "0.1.0",
     "@ric/ui-tokens": "0.1.0"
   }
