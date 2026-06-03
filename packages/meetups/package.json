@@ -1,5 +1,5 @@
 {
-  "name": "@ric/ui-core",
+  "name": "@ric/meetups",
   "version": "0.1.0",
   "type": "module",
   "main": "./src/index.js",
@@ -8,6 +8,8 @@
     "./react": "./src/react.jsx"
   },
   "dependencies": {
+    "@ric/places": "*",
+    "@ric/ui-core": "*",
     "@ric/ui-tokens": "*"
   },
   "peerDependencies": {

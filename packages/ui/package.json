@@ -4,13 +4,20 @@
   "type": "module",
   "main": "./src/index.js",
   "exports": {
-    ".": "./src/index.js"
+    ".": "./src/index.js",
+    "./react": "./src/react.jsx"
   },
   "dependencies": {
-    "@ric/emoji": "0.1.0",
-    "@ric/icons": "0.1.0",
-    "@ric/map-ui": "0.1.0",
-    "@ric/ui-core": "0.1.0",
-    "@ric/ui-tokens": "0.1.0"
+    "@ric/chat": "*",
+    "@ric/emoji": "*",
+    "@ric/icons": "*",
+    "@ric/map-ui": "*",
+    "@ric/meetups": "*",
+    "@ric/places": "*",
+    "@ric/ui-core": "*",
+    "@ric/ui-tokens": "*"
+  },
+  "peerDependencies": {
+    "react": ">=18"
   }
 }
