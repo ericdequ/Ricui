@@ -1,0 +1,14 @@
+{
+  "name": "ricui-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Unified RIC UI workspace",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "check:imports": "node ./scripts/verify-imports.mjs",
+    "test": "node ./scripts/verify-imports.mjs"
+  }
+}

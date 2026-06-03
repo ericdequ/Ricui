@@ -1,1 +1,3 @@
-move all repos ui to this repo to be used as a template ui pnpm package make work with icons
+Unified UI source of truth for all RIC projects.
+
+See `UI/STANDARDS.md` for naming, accessibility, and theming rules.
