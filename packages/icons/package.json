@@ -1,9 +1,16 @@
 {
   "name": "@ric/icons",
   "version": "0.1.0",
+  "description": "Semantic icon catalog (emoji-backed) for all RIC projects, with alias look-up helpers",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js"
+  },
+  "keywords": ["ric", "icons", "iconography", "emoji", "semantic-icons"],
+  "license": "MIT",
+  "files": ["src"],
+  "publishConfig": {
+    "access": "public"
   }
 }

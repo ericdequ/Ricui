@@ -1,9 +1,16 @@
 {
   "name": "@ric/ui-tokens",
   "version": "0.1.0",
+  "description": "Shared design tokens (colors, spacing, typography, motion) for RIC UI packages",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js"
+  },
+  "keywords": ["ric", "ui", "design-tokens", "tokens", "theme"],
+  "license": "MIT",
+  "files": ["src"],
+  "publishConfig": {
+    "access": "public"
   }
 }
