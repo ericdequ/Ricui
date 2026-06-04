@@ -12,7 +12,7 @@
 // guard (same as Button).
 // =============================================================================
 
-import { forwardRef, useCallback, useRef } from 'react';
+import { forwardRef, isValidElement, useCallback, useRef } from 'react';
 
 import { cx } from './index.js';
 
@@ -73,11 +73,20 @@ export const IconButton = forwardRef(function IconButton(
   );
 
   const glyphClass = cx(glyph, 'transition-transform duration-300 ease-out group-hover/iconbtn:scale-[1.06] motion-reduce:transform-none motion-reduce:transition-none', iconClassName);
+  // `icon` may be a rendered element (@ric/chat: <XIcon/>) or a component —
+  // including memo()/forwardRef() objects, which are NOT typeof 'function'. So
+  // detect the element case and render everything else as <Icon/>.
   const Icon = icon;
-  const renderedIcon =
-    typeof icon === 'function'
-      ? <Icon className={glyphClass} aria-hidden="true" />
-      : <span className={cx('inline-flex items-center justify-center', glyphClass)} aria-hidden="true">{icon}</span>;
+  let renderedIcon = null;
+  if (isValidElement(icon)) {
+    renderedIcon = (
+      <span className={cx('inline-flex items-center justify-center', glyphClass)} aria-hidden="true">
+        {icon}
+      </span>
+    );
+  } else if (icon) {
+    renderedIcon = <Icon className={glyphClass} aria-hidden="true" />;
+  }
 
   return (
     <button
