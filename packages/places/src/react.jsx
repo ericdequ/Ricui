@@ -11,15 +11,15 @@
 // is absent (strict-addition principle).
 // =============================================================================
 
-import { Card, Pill, StatusDot } from '@ric/ui-core/react';
 import { cx } from '@ric/ui-core';
+import { Card, Pill, StatusDot } from '@ric/ui-core/react';
 
 import {
-  resolvePlaceState,
   formatDistance,
   formatPriceLevel,
   formatRating,
   getPlaceKind,
+  resolvePlaceState,
 } from './index.js';
 
 /** Place name with optional kind-accent. @param {{name?:string, kind?:string, className?:string, as?:any}} props */

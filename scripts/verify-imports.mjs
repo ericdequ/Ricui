@@ -3,31 +3,31 @@
 // consuming app's build; here we only assert the pure-JS surface is wired.
 
 import {
-  tokens,
-  resolveTone,
-  ICON_SIZE,
-  ROLE_PALETTE,
-  iconography,
-  emojiCatalog,
-  getEmoji,
-  // places
-  resolvePlaceState,
-  formatDistance,
-  getPlaceKind,
-  listPlaceKinds,
-  // meetups
-  RSVP,
-  resolveMeetupState,
-  MEETUP_STATE,
-  // chat
-  CHAT_SCOPE,
-  getChatScope,
   // map-ui
   buildMapUiFeatureProps,
   buildMapUiPanelModel,
+  // chat
+  CHAT_SCOPE,
+  emojiCatalog,
+  formatDistance,
+  getChatScope,
+  getEmoji,
+  getPlaceKind,
+  ICON_SIZE,
+  iconography,
+  listPlaceKinds,
   mapUiFamilies,
+  MEETUP_STATE,
   resolveMapUiGlyphPath,
+  resolveMeetupState,
+  // places
+  resolvePlaceState,
+  resolveTone,
+  ROLE_PALETTE,
+  // meetups
+  RSVP,
   summarizeMapUiCoverage,
+  tokens,
   validateMapUiRegistry,
 } from '@ric/ui';
 

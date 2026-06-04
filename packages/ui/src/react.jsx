@@ -6,7 +6,7 @@
 // from "@ric/ui".
 // =============================================================================
 
-export * from '@ric/ui-core/react';
-export * from '@ric/places/react';
-export * from '@ric/meetups/react';
 export * from '@ric/chat/react';
+export * from '@ric/meetups/react';
+export * from '@ric/places/react';
+export * from '@ric/ui-core/react';

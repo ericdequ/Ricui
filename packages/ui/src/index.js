@@ -13,16 +13,16 @@
 export * from '@ric/ui-tokens';
 
 // Core contract + helpers
-export { components, accessibilityBaseline, cx, toneChipClass } from '@ric/ui-core';
+export { accessibilityBaseline, components, cx, toneChipClass } from '@ric/ui-core';
 
 // Icons + emoji catalogs
-export { iconography } from '@ric/icons';
 export { emojiCatalog, getEmoji } from '@ric/emoji';
+export { iconography } from '@ric/icons';
 
 // Domain contracts (node-safe — enums, registries, formatters)
-export * from '@ric/places';
-export * from '@ric/meetups';
 export * from '@ric/chat';
+export * from '@ric/meetups';
+export * from '@ric/places';
 
 // Map UI — families, glyph hierarchy, legends, panel/action contracts (node-safe)
 export * from '@ric/map-ui';

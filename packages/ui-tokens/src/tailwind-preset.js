@@ -11,7 +11,7 @@
 //   export default { presets: [ricTailwindPreset], content: [...] };
 // =============================================================================
 
-import { ROLE_PALETTE, GRADIENTS, RADIUS } from './index.js';
+import { GRADIENTS, RADIUS,ROLE_PALETTE } from './index.js';
 
 const backgroundImage = Object.fromEntries(
   Object.entries(GRADIENTS).map(([key, value]) => [`grad-${key}`, value]),

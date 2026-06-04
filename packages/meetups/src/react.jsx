@@ -6,11 +6,11 @@
 // only the PlaceView passed in differs.
 // =============================================================================
 
-import { Card, Pill, StatusDot } from '@ric/ui-core/react';
+import { PlaceAddress,PlaceName } from '@ric/places/react';
 import { cx } from '@ric/ui-core';
-import { PlaceName, PlaceAddress } from '@ric/places/react';
+import { Card, Pill, StatusDot } from '@ric/ui-core/react';
 
-import { MEETUP_STATE_META, formatMeetupTime, resolveMeetupState } from './index.js';
+import { formatMeetupTime, MEETUP_STATE_META, resolveMeetupState } from './index.js';
 
 /**
  * Relative start time. Pass `now` (epoch ms) so the component stays pure and
@@ -61,7 +61,7 @@ export function MeetupAttendees({ attendees, max = 4, size = 28, className }) {
           style={{ width: size, height: size, marginLeft: i === 0 ? 0 : -size / 3, zIndex: shown.length - i }}
         >
           {a.avatarUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
+             
             <img src={a.avatarUrl} alt={a.name || ''} className="h-full w-full object-cover" />
           ) : (
             (a.name || '?').slice(0, 1).toUpperCase()

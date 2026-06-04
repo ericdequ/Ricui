@@ -7,10 +7,9 @@
 // renders a public place room, a private meetup, or any registered scope.
 // =============================================================================
 
-import { useState } from 'react';
-
-import { Pill, IconButton } from '@ric/ui-core/react';
 import { cx } from '@ric/ui-core';
+import { IconButton,Pill } from '@ric/ui-core/react';
+import { useState } from 'react';
 
 import { getChatScope, isSameAuthorRun } from './index.js';
 
@@ -33,7 +32,7 @@ export function ChatMessage({ message, showAuthor = true, className }) {
       {!mine && showAuthor ? (
         <span className="mt-auto inline-flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-slate-700 text-[10px] font-semibold text-white">
           {avatarUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
+             
             <img src={avatarUrl} alt={authorName || ''} className="h-full w-full object-cover" />
           ) : (
             (authorName || '?').slice(0, 1).toUpperCase()
