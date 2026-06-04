@@ -5,7 +5,8 @@
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
-    "./react": "./src/react.jsx"
+    "./react": "./src/react.jsx",
+    "./styles.css": "./src/styles.css"
   },
   "dependencies": {
     "@ric/ui-tokens": "^0.1.0"

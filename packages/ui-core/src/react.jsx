@@ -17,6 +17,8 @@ import { cx, toneChipClass } from './index.js';
 export { FieldFeedback, Input, SectionHeader, StatusBanner,Textarea, Toggle } from './forms.jsx';
 // Overlays, nav, display (migrated from BEV src/ui).
 export { BottomSheet, Modal, Pagination, StarRating,Tabs, Toast } from './more.jsx';
+// Button — CSS-first; needs the '@ric/ui-core/styles.css' import for ripple/sheen.
+export { Button } from './button.jsx';
 
 const PILL_SIZE = {
   xs: 'px-1.5 py-0.5 text-[10px] gap-1',

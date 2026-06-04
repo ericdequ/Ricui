@@ -1,0 +1,67 @@
+/* =============================================================================
+ * @ric/ui-core/styles.css — keyframe effects for the brand primitives
+ * =============================================================================
+ * @ric/ui-core components are JSX + Tailwind utility classes; the few effects
+ * that need real @keyframes (a button's tap ripple + hover sheen, later the
+ * Toggle sparkle / Pill bloom) live here so they ship with the library instead
+ * of relying on a consumer's global CSS. Import ONCE in the consuming app:
+ *
+ *   import '@ric/ui-core/styles.css';   // e.g. BEV src/styles/globals.css
+ *
+ * Everything is namespaced `ric-` so it never collides with a host app's own
+ * classes, and every animation is disabled under prefers-reduced-motion.
+ * ========================================================================== */
+
+/* --- Button: tap ripple --------------------------------------------------- */
+/* A diagonal-sized circle is positioned at the press point in JS, then scales
+ * up and fades. `overflow-hidden` on the button clips it to the shape. */
+@keyframes ric-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.ric-ripple {
+  animation: ric-ripple 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Button: hover sheen -------------------------------------------------- */
+/* A soft light bar sweeps across the button once on hover — the "premium"
+ * glass cue. Pure CSS via a clipped ::before; no JS, no extra DOM from React. */
+.ric-button-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.ric-button-shine::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -120%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 100%
+  );
+  transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.ric-button-shine:hover::before {
+  left: 120%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ric-ripple {
+    animation: none;
+  }
+  .ric-button-shine::before {
+    transition: none;
+  }
+}
