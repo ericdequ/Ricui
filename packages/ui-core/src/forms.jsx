@@ -59,21 +59,8 @@ export function Textarea({ label, error, hint, rows = 3, className, id, ...rest 
   );
 }
 
-/**
- * Section header: title + optional subtitle + trailing actions slot.
- * @param {{title:any, subtitle?:any, actions?:any, as?:any, className?:string}} props
- */
-export function SectionHeader({ title, subtitle, actions, as: Tag = 'h2', className }) {
-  return (
-    <div className={cx('mb-3 flex items-start justify-between gap-3', className)}>
-      <div className="min-w-0">
-        <Tag className="truncate text-base font-semibold text-white">{title}</Tag>
-        {subtitle ? <p className="mt-0.5 text-sm text-white/60">{subtitle}</p> : null}
-      </div>
-      {actions ? <div className="flex shrink-0 items-center gap-2">{actions}</div> : null}
-    </div>
-  );
-}
+// SectionHeader moved to ./section-header.jsx — BEV's compact eyebrow label
+// replaced this title+subtitle version (no @ric-internal consumers).
 
 /**
  * Inline status banner.

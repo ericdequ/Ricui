@@ -14,7 +14,11 @@ import { ICON_SIZE, MOTION, resolveTone } from '@ric/ui-tokens';
 import { cx, toneChipClass } from './index.js';
 
 // Form + section primitives (migrated from BEV src/ui).
-export { FieldFeedback, Input, SectionHeader, StatusBanner,Textarea } from './forms.jsx';
+export { FieldFeedback, Input, StatusBanner,Textarea } from './forms.jsx';
+// SectionHeader is BEV's compact eyebrow label (replaced the title+subtitle one);
+// SectionEyebrow + AccentBadge are the bar-tab micro-labels.
+export { SectionHeader } from './section-header.jsx';
+export { AccentBadge, SectionEyebrow } from './tab-primitives.jsx';
 // Toggle is the bespoke brand-sparkle switch (richer than the old lean one).
 export { Toggle, ToggleGlyph } from './toggle.jsx';
 export { BrandGradient } from './brand.jsx';
