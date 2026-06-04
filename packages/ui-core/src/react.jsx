@@ -20,6 +20,8 @@ export { cx } from './index.js';
 export { GlassPanel, InsetPanel, SelectableGlassCard, ToneButton, TonePill } from './glass-panel.jsx';
 // VirtualizedList — needs react-virtuoso (optional peer dep) when it virtualizes.
 export { VirtualizedList } from './virtualized-list.jsx';
+// Experience backdrop + section panel (orb keyframes ship in styles.css).
+export { ExperienceCanvas, ExperienceSectionPanel } from './experience.jsx';
 
 // Form + section primitives (migrated from BEV src/ui).
 export { FieldFeedback, Input, StatusBanner,Textarea } from './forms.jsx';

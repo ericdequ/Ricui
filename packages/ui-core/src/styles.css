@@ -809,3 +809,111 @@
 .font-display-title { font-family: var(--font-display, inherit); letter-spacing: var(--title-tracking, -0.02em); line-height: 0.98; text-wrap: balance; }
 .font-display-label { font-family: var(--font-display, inherit); letter-spacing: var(--label-tracking, 0.08em); text-transform: uppercase; }
 .text-copy-soft { letter-spacing: var(--copy-tracking, 0); }
+
+/* =============================================================================
+ * experience backdrop — upstreamed from BEV src/styles/system/experience.css
+ * Full-screen ambient-orb canvas behind the ExperienceCanvas primitive.
+ * ========================================================================== */
+/* =============================================================================
+   /styles/system/experience.css
+   -----------------------------------------------------------------------------
+   Experience-shell tokens — replaces experience.js.
+
+   Two surfaces:
+     1. Experience canvas — full-screen backdrop with 3 ambient blur orbs.
+        The old JS exposed 3 near-identical variants (default/bar/meetup);
+        the visual difference between them was a tiny position/blur tweak
+        that no one would notice. Unified into one canonical set.
+     2. Static page callouts — bordered + tone-tinted inline notes used by
+        long-form static pages. 6 tones via data-attribute + part pattern.
+============================================================================= */
+
+/* === Experience canvas ambient orbs ====================================== */
+
+.experience-canvas-orb {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+}
+.experience-canvas-orb-1 {
+  left: 8%;
+  top: 4rem;
+  height: 18rem;
+  width: 18rem;
+  background-color: color-mix(in oklab, var(--color-cyan-500) 12%, transparent);
+  filter: blur(120px);
+}
+.experience-canvas-orb-2 {
+  right: 10%;
+  top: 6rem;
+  height: 20rem;
+  width: 20rem;
+  background-color: color-mix(
+    in oklab,
+    var(--color-fuchsia-500) 10%,
+    transparent
+  );
+  filter: blur(135px);
+}
+.experience-canvas-orb-3 {
+  bottom: 0;
+  left: 33.333%;
+  height: 18rem;
+  width: 18rem;
+  background-color: color-mix(in oklab, var(--color-amber-500) 8%, transparent);
+  filter: blur(130px);
+}
+
+/* === Static page callout tones =========================================== */
+
+/* Slate is alpha-on-white (no hue); the other 5 follow the canonical
+   /300 border + /500 fill + /50 text recipe. Slate harmonizes the old
+   /12 border to /24 so all 6 tones share one part rule. */
+[data-callout-tone='slate'] {
+  --callout-border: rgb(255 255 255 / 0.24);
+  --callout-bg: rgb(255 255 255 / 0.08);
+  --callout-text: rgb(255 255 255 / 0.78);
+}
+[data-callout-tone='sky'] {
+  --callout-border: color-mix(in oklab, var(--color-sky-300) 24%, transparent);
+  --callout-bg: color-mix(in oklab, var(--color-sky-500) 8%, transparent);
+  --callout-text: var(--color-sky-50);
+}
+[data-callout-tone='emerald'] {
+  --callout-border: color-mix(
+    in oklab,
+    var(--color-emerald-300) 24%,
+    transparent
+  );
+  --callout-bg: color-mix(in oklab, var(--color-emerald-500) 8%, transparent);
+  --callout-text: var(--color-emerald-50);
+}
+[data-callout-tone='amber'] {
+  --callout-border: color-mix(
+    in oklab,
+    var(--color-amber-300) 24%,
+    transparent
+  );
+  --callout-bg: color-mix(in oklab, var(--color-amber-500) 8%, transparent);
+  --callout-text: var(--color-amber-50);
+}
+[data-callout-tone='rose'] {
+  --callout-border: color-mix(in oklab, var(--color-rose-300) 24%, transparent);
+  --callout-bg: color-mix(in oklab, var(--color-rose-500) 8%, transparent);
+  --callout-text: var(--color-rose-50);
+}
+[data-callout-tone='fuchsia'] {
+  --callout-border: color-mix(
+    in oklab,
+    var(--color-fuchsia-300) 24%,
+    transparent
+  );
+  --callout-bg: color-mix(in oklab, var(--color-fuchsia-500) 8%, transparent);
+  --callout-text: var(--color-fuchsia-50);
+}
+
+.static-page-callout {
+  border: 1px solid var(--callout-border);
+  background-color: var(--callout-bg);
+  color: var(--callout-text);
+}
