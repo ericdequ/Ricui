@@ -83,6 +83,51 @@
   animation: ric-toggle-spark 0.3s ease-out forwards;
 }
 
+/* --- Generic one-shot entrances (StateCard, StatusBanner, …) -------------- */
+@keyframes ric-fade-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.ric-fade-scale-in {
+  animation: ric-fade-scale-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes ric-drop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.ric-drop-in {
+  animation: ric-drop-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes ric-wobble {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(6deg);
+  }
+  75% {
+    transform: rotate(-6deg);
+  }
+}
+.ric-wobble {
+  animation: ric-wobble 3s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ric-ripple {
     animation: none;
@@ -91,6 +136,11 @@
     transition: none;
   }
   .ric-toggle-spark {
+    animation: none;
+  }
+  .ric-fade-scale-in,
+  .ric-drop-in,
+  .ric-wobble {
     animation: none;
   }
 }

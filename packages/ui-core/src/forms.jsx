@@ -8,7 +8,7 @@
 // ./toggle.jsx — the bespoke brand-sparkle switch upstreamed from BEV.)
 // =============================================================================
 
-import { cx, toneChipClass } from './index.js';
+import { cx } from './index.js';
 
 /**
  * Field validation/help line under an input.
@@ -62,15 +62,5 @@ export function Textarea({ label, error, hint, rows = 3, className, id, ...rest 
 // SectionHeader moved to ./section-header.jsx — BEV's compact eyebrow label
 // replaced this title+subtitle version (no @ric-internal consumers).
 
-/**
- * Inline status banner.
- * @param {{tone?:string, variant?:string, icon?:any, children:any, className?:string}} props
- */
-export function StatusBanner({ tone, variant, icon, children, className }) {
-  return (
-    <div role="status" className={cx('flex items-start gap-2 rounded-xl border px-3 py-2 text-sm', toneChipClass({ tone, variant }), className)}>
-      {icon ? <span className="mt-0.5 h-4 w-4 shrink-0">{icon}</span> : null}
-      <div className="min-w-0">{children}</div>
-    </div>
-  );
-}
+// StatusBanner moved to ./status-banner.jsx — BEV's richer panel/inline version
+// replaced this lean one (no @ric-internal consumers).
