@@ -112,6 +112,20 @@
   animation: ric-drop-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+@keyframes ric-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.ric-rise-in {
+  animation: ric-rise-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @keyframes ric-wobble {
   0%,
   100% {
@@ -140,6 +154,7 @@
   }
   .ric-fade-scale-in,
   .ric-drop-in,
+  .ric-rise-in,
   .ric-wobble {
     animation: none;
   }
