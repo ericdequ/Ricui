@@ -26,62 +26,9 @@ export { Button } from './button.jsx';
 export { ButtonGroup, ButtonGroupItem } from './button-group.jsx';
 export { StepProgressBar } from './step-progress.jsx';
 
-const PILL_SIZE = {
-  xs: 'px-1.5 py-0.5 text-[10px] gap-1',
-  sm: 'px-2 py-0.5 text-[11px] gap-1',
-  md: 'px-2.5 py-1 text-xs gap-1.5',
-  lg: 'px-3 py-1.5 text-sm gap-1.5',
-};
-
-/**
- * Canonical pill / chip / tag. Leading-content priority: `leading` (any JSX)
- * wins, else `icon`. When `onClick` is set it renders as a button with press
- * feedback; otherwise a span.
- *
- * @param {object} props
- * @param {string} [props.tone] - Explicit canonical tone.
- * @param {string} [props.variant] - Semantic alias (success/warning/danger/…).
- * @param {'xs'|'sm'|'md'|'lg'} [props.size]
- * @param {import('react').ReactNode} [props.leading] - Arbitrary leading node.
- * @param {import('react').ReactNode} [props.icon] - Leading icon node.
- * @param {() => void} [props.onClick]
- * @param {string} [props.className]
- * @param {import('react').ReactNode} props.children
- */
-export function Pill({
-  tone,
-  variant,
-  size = 'md',
-  leading,
-  icon,
-  onClick,
-  className,
-  children,
-  ...rest
-}) {
-  const cls = cx(
-    'inline-flex items-center rounded-full border font-medium',
-    PILL_SIZE[size] || PILL_SIZE.md,
-    toneChipClass({ tone, variant }),
-    onClick && cx('cursor-pointer', MOTION.tap),
-    className,
-  );
-  const lead = leading ?? (icon ? <span className={cx('shrink-0', ICON_SIZE.pill[size] || ICON_SIZE.pill.md)}>{icon}</span> : null);
-  const inner = (
-    <>
-      {lead}
-      <span className="truncate">{children}</span>
-    </>
-  );
-  if (onClick) {
-    return (
-      <button type="button" onClick={onClick} className={cls} {...rest}>
-        {inner}
-      </button>
-    );
-  }
-  return <span className={cls} {...rest}>{inner}</span>;
-}
+// Pill — the bespoke radial-bloom chip upstreamed from BEV (richer than the old
+// lean version: 14 tones, icon bubble, emoji, gradient, weight, uppercase).
+export { Pill } from './pill.jsx';
 
 /**
  * Tiny count / signal badge — circular when short, pill when wide.
