@@ -9,7 +9,7 @@
 // compose. Keep them lean: composition + slots over variant props.
 // =============================================================================
 
-import { ICON_SIZE, MOTION, resolveTone } from '@ric/ui-tokens';
+import { MOTION } from '@ric/ui-tokens';
 
 import { cx, toneChipClass } from './index.js';
 
@@ -177,48 +177,9 @@ export function ResultRow({ children, highlight = false, className }) {
   );
 }
 
-const ICONBTN_TONE = {
-  slate: 'text-slate-200 hover:bg-slate-500/20',
-  emerald: 'text-emerald-200 hover:bg-emerald-500/20',
-  amber: 'text-amber-200 hover:bg-amber-500/20',
-  rose: 'text-rose-200 hover:bg-rose-500/20',
-  fuchsia: 'text-fuchsia-200 hover:bg-fuchsia-500/20',
-  cyan: 'text-cyan-200 hover:bg-cyan-500/20',
-  sky: 'text-sky-200 hover:bg-sky-500/20',
-  violet: 'text-violet-200 hover:bg-violet-500/20',
-};
-
-/**
- * Glyph-only square button. `label` is required for a11y (aria-label).
- * @param {object} props
- * @param {import('react').ReactNode} props.icon
- * @param {string} props.label
- * @param {'xs'|'sm'|'md'|'lg'} [props.size]
- * @param {string} [props.tone]
- * @param {string} [props.variant]
- * @param {() => void} [props.onClick]
- * @param {string} [props.className]
- */
-export function IconButton({ icon, label, size = 'md', tone, variant, onClick, className, ...rest }) {
-  const resolved = ICONBTN_TONE[resolveTone(tone, variant)] || ICONBTN_TONE.slate;
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      onClick={onClick}
-      className={cx(
-        'inline-flex items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current/40',
-        ICON_SIZE.iconButtonFrame[size] || ICON_SIZE.iconButtonFrame.md,
-        resolved,
-        MOTION.tap,
-        className,
-      )}
-      {...rest}
-    >
-      <span className={ICON_SIZE.iconButtonGlyph[size] || ICON_SIZE.iconButtonGlyph.md}>{icon}</span>
-    </button>
-  );
-}
+// IconButton moved to ./icon-button.jsx — BEV's richer version, adapted to accept
+// EITHER a component or a node `icon` so @ric/chat (node + label) keeps working.
+export { IconButton } from './icon-button.jsx';
 
 /**
  * Generic dark-glass card surface. Slot-based: pass `media`, `header`,
