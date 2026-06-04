@@ -148,6 +148,74 @@ export function CountBadge({ count, max = 99, tone = 'rose', size = 'sm', classN
   );
 }
 
+const STATPILL_TONE = {
+  amber: 'border-amber-300/22 bg-amber-500/14 text-amber-100',
+  cyan: 'border-cyan-300/22 bg-cyan-500/14 text-cyan-100',
+  emerald: 'border-emerald-300/22 bg-emerald-500/14 text-emerald-100',
+  fuchsia: 'border-fuchsia-300/22 bg-fuchsia-500/14 text-fuchsia-100',
+  rose: 'border-rose-300/22 bg-rose-500/14 text-rose-100',
+  slate: 'border-white/12 bg-white/[0.06] text-white/82',
+};
+
+/**
+ * Score/stat display chip. Two shapes via `variant`: an inline tone-driven pill
+ * (default), or a stacked label-over-value `card`. `value` is a node so it can
+ * hold a count, text, or emoji.
+ *
+ * @param {object} props
+ * @param {string} [props.label] - Muted label (uppercase).
+ * @param {import('react').ReactNode} [props.value] - The stat value.
+ * @param {'chip'|'card'} [props.variant]
+ * @param {'amber'|'cyan'|'emerald'|'fuchsia'|'rose'|'slate'} [props.tone]
+ * @param {string} [props.className]
+ */
+export function StatPill({ label, value, variant = 'chip', tone = 'slate', className }) {
+  if (variant === 'card') {
+    return (
+      <div className={cx('rounded-2xl border border-white/10 bg-white/[0.06] px-3 py-2 text-center', className)}>
+        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/45">{label}</p>
+        <p className="mt-1 text-base font-black text-white">{value}</p>
+      </div>
+    );
+  }
+  return (
+    <div
+      className={cx(
+        'inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em]',
+        STATPILL_TONE[tone] || STATPILL_TONE.slate,
+        className,
+      )}
+    >
+      {label != null ? <span className="opacity-60">{label}</span> : null}
+      <span>{value}</span>
+    </div>
+  );
+}
+
+/**
+ * Slotted final-board / leaderboard row: a full-width flex row whose border
+ * switches to an amber wash for the winner/leader. Pure slot — the row body is
+ * the caller's children.
+ *
+ * @param {object} props
+ * @param {import('react').ReactNode} props.children
+ * @param {boolean} [props.highlight] - Winner/leader emphasis (amber wash).
+ * @param {string} [props.className]
+ */
+export function ResultRow({ children, highlight = false, className }) {
+  return (
+    <div
+      className={cx(
+        'flex items-center justify-between rounded-[20px] border px-4 py-3',
+        highlight ? 'border-amber-300/30 bg-amber-500/12' : 'border-white/10 bg-white/[0.04]',
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
 const ICONBTN_TONE = {
   slate: 'text-slate-200 hover:bg-slate-500/20',
   emerald: 'text-emerald-200 hover:bg-emerald-500/20',
