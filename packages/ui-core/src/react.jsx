@@ -14,7 +14,10 @@ import { ICON_SIZE, MOTION, resolveTone } from '@ric/ui-tokens';
 import { cx, toneChipClass } from './index.js';
 
 // Form + section primitives (migrated from BEV src/ui).
-export { FieldFeedback, Input, SectionHeader, StatusBanner,Textarea, Toggle } from './forms.jsx';
+export { FieldFeedback, Input, SectionHeader, StatusBanner,Textarea } from './forms.jsx';
+// Toggle is the bespoke brand-sparkle switch (richer than the old lean one).
+export { Toggle, ToggleGlyph } from './toggle.jsx';
+export { BrandGradient } from './brand.jsx';
 // Overlays, nav, display (migrated from BEV src/ui).
 export { BottomSheet, Modal, Pagination, StarRating,Tabs, Toast } from './more.jsx';
 // Button — CSS-first; needs the '@ric/ui-core/styles.css' import for ripple/sheen.

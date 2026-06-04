@@ -57,11 +57,40 @@
   left: 120%;
 }
 
+/* --- Toggle: brand sparkles ---------------------------------------------- */
+/* Three brand-gradient puffs that fire ONCE on toggle-on. Base opacity:0 keeps
+ * them invisible until (and after) the animation, and — crucially — invisible
+ * under reduced-motion, where the animation is disabled entirely. */
+@keyframes ric-toggle-spark {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
+.ric-toggle-spark {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ric-toggle-spark 0.3s ease-out forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ric-ripple {
     animation: none;
   }
   .ric-button-shine::before {
     transition: none;
+  }
+  .ric-toggle-spark {
+    animation: none;
   }
 }

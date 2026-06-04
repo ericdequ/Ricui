@@ -1,46 +1,14 @@
 // =============================================================================
 // @ric/ui-core/react — form + section primitives (migrated from BEV src/ui)
 // =============================================================================
-// Prop-driven, domain-agnostic. De-BEV'd reimplementations of BEV's Toggle,
+// Prop-driven, domain-agnostic. De-BEV'd reimplementations of BEV's
 // form/{Input,Textarea,FieldFeedback}, SectionHeader, and StatusBanner. CSS
 // micro-interactions (no framer-motion), React peer only. Re-exported from
-// ./react.jsx so they ship under "@ric/ui-core/react".
+// ./react.jsx so they ship under "@ric/ui-core/react". (Toggle moved to
+// ./toggle.jsx — the bespoke brand-sparkle switch upstreamed from BEV.)
 // =============================================================================
 
 import { cx, toneChipClass } from './index.js';
-
-/**
- * On/off switch. Controlled via `checked` + `onChange(next)`.
- * @param {{checked?:boolean, onChange?:(v:boolean)=>void, label?:string, disabled?:boolean, size?:'sm'|'md', className?:string}} props
- */
-export function Toggle({ checked = false, onChange, label, disabled, size = 'md', className }) {
-  const dims = size === 'sm' ? { track: 'h-5 w-9', knob: 'h-4 w-4', shift: 'translate-x-4' } : { track: 'h-6 w-11', knob: 'h-5 w-5', shift: 'translate-x-5' };
-  return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={checked}
-      aria-label={label}
-      disabled={disabled}
-      onClick={() => onChange?.(!checked)}
-      className={cx(
-        'relative inline-flex shrink-0 items-center rounded-full border border-white/10 transition-colors duration-200 motion-reduce:transition-none',
-        dims.track,
-        checked ? 'bg-emerald-500/70' : 'bg-white/15',
-        disabled && 'cursor-not-allowed opacity-50',
-        className,
-      )}
-    >
-      <span
-        className={cx(
-          'inline-block transform rounded-full bg-white shadow transition-transform duration-200 motion-reduce:transition-none',
-          dims.knob,
-          checked ? dims.shift : 'translate-x-0.5',
-        )}
-      />
-    </button>
-  );
-}
 
 /**
  * Field validation/help line under an input.
