@@ -130,6 +130,7 @@ const renderLeading = ({ leading, emoji, Icon, iconBubble, tone, size }) => {
  * @param {boolean} [props.animate] - Loop an opacity pulse.
  * @param {string} [props.gradient] - `from-… to-…` classes that override the tone bg.
  * @param {() => void} [props.onClick] - When set, renders through Button.
+ * @param {boolean} [props.disabled] - Disable the clickable pill (dims + blocks).
  * @param {string} [props.ariaLabel]
  * @param {string} [props.className]
  */
@@ -147,6 +148,7 @@ export function Pill({
   animate = false,
   gradient,
   onClick,
+  disabled = false,
   ariaLabel,
   className = '',
   ...rest
@@ -174,6 +176,7 @@ export function Pill({
         showRipple={false}
         showHighlight={false}
         onClick={onClick}
+        disabled={disabled}
         aria-label={ariaLabel}
         className={cx(baseClass, gradient ? '' : HOVER_BLOOM, 'min-h-[32px] cursor-pointer transition-colors')}
         contentClassName="contents"
@@ -186,7 +189,7 @@ export function Pill({
   }
 
   return (
-    <span className={baseClass} aria-label={ariaLabel} {...rest}>
+    <span className={cx(baseClass, disabled && 'opacity-50')} aria-disabled={disabled || undefined} aria-label={ariaLabel} {...rest}>
       {lead}
       {body}
     </span>

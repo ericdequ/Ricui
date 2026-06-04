@@ -247,12 +247,15 @@ const DOT_TONE = {
   amber: 'bg-amber-300',
   slate: 'bg-slate-300',
   sky: 'bg-sky-300',
+  cyan: 'bg-cyan-300',
+  violet: 'bg-violet-300',
+  fuchsia: 'bg-fuchsia-300',
 };
 
 /**
  * Status dot — solid colored dot, optionally pulsing (e.g. "live"/"open").
  * @param {object} props
- * @param {'emerald'|'rose'|'amber'|'slate'|'sky'} [props.tone]
+ * @param {'emerald'|'rose'|'amber'|'slate'|'sky'|'cyan'|'violet'|'fuchsia'} [props.tone]
  * @param {boolean} [props.pulse]
  * @param {string} [props.className]
  */

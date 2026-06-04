@@ -8,23 +8,9 @@
 // totalCount is 0. (Distinct from @ric's simple `Pagination`.)
 // =============================================================================
 
+import { ChevronLeft, ChevronRight } from './glyphs.jsx';
 import { cx } from './index.js';
 import { IconButton } from './icon-button.jsx';
-
-function ChevronLeft({ className }) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className}>
-      <path d="M12 5l-5 5 5 5" />
-    </svg>
-  );
-}
-function ChevronRight({ className }) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className}>
-      <path d="M8 5l5 5-5 5" />
-    </svg>
-  );
-}
 
 /** A single page dot — grows + cyan-glows when active. */
 function PaginationDot({ dot, pageIndex }) {

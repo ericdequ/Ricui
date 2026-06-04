@@ -19,6 +19,7 @@ import { createPortal } from 'react-dom';
 
 import { useFocusReturn, useFocusTrap, useKeyboardNav } from './a11y.js';
 import { Button } from './button.jsx';
+import { XMark } from './glyphs.jsx';
 import { cx } from './index.js';
 import { IconButton } from './icon-button.jsx';
 
@@ -248,7 +249,7 @@ export function Modal({
                 {header || (title && <h2 id={labelledById} className="font-display-title pr-10 text-[1.4rem] font-black tracking-[-0.035em] text-white">{title}</h2>)}
                 {showCloseButton ? (
                   <IconButton
-                    icon={CloseGlyph}
+                    icon={XMark}
                     onClick={onClose}
                     ariaLabel="Close"
                     size="md"
@@ -272,15 +273,6 @@ export function Modal({
       </div>
     </>,
     document.body,
-  );
-}
-
-/** Default close glyph (X) — inline so the close button needs no icon import. */
-function CloseGlyph({ className }) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" className={className}>
-      <path d="M6 6l8 8M14 6l-8 8" />
-    </svg>
   );
 }
 

@@ -25,7 +25,7 @@ export function FieldFeedback({ state = 'hint', children, className }) {
 }
 
 const FIELD_BASE =
-  'w-full rounded-xl border bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:outline-none focus-visible:ring-2 transition-colors';
+  'w-full rounded-xl border bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/40 transition-colors duration-200 focus:outline-none focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none';
 
 const fieldTone = (error) =>
   error

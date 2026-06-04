@@ -9,19 +9,11 @@
 
 import { cloneElement, createElement, isValidElement, memo } from 'react';
 
+import { CheckCircle } from './glyphs.jsx';
 import { cx } from './index.js';
 
 const canInstantiateComponentType = (value) =>
   Boolean(value && !isValidElement(value) && (typeof value === 'function' || (typeof value === 'object' && value.$$typeof)));
-
-/** Inline check-circle (was BEV's CheckCircleIcon) for the selected card state. */
-function CheckCircle({ className }) {
-  return (
-    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className={className}>
-      <path fillRule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.7-9.3a1 1 0 0 0-1.4-1.4L9 10.6 7.7 9.3a1 1 0 0 0-1.4 1.4l2 2a1 1 0 0 0 1.4 0l4-4Z" clipRule="evenodd" />
-    </svg>
-  );
-}
 
 /**
  * Small tone-styled status pill (data-tone-pill-* → styles.css).

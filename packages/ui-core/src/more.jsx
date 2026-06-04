@@ -6,6 +6,7 @@
 // Re-exported from ./react.jsx.
 // =============================================================================
 
+import { ChevronLeft, ChevronRight, XMark } from './glyphs.jsx';
 import { cx, toneChipClass } from './index.js';
 
 // Modal + BottomSheet moved to ./modal.jsx — the full portal modal system
@@ -19,7 +20,14 @@ export function Toast({ tone, variant, icon, children, onDismiss, className }) {
       {icon ? <span className="mt-0.5 h-4 w-4 shrink-0">{icon}</span> : null}
       <div className="min-w-0 flex-1">{children}</div>
       {onDismiss ? (
-        <button type="button" onClick={onDismiss} aria-label="Dismiss" className="shrink-0 text-white/50 hover:text-white">×</button>
+        <button
+          type="button"
+          onClick={onDismiss}
+          aria-label="Dismiss"
+          className="-mr-1 -mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-white/50 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current/40 motion-reduce:transition-none"
+        >
+          <XMark className="h-3.5 w-3.5" />
+        </button>
       ) : null}
     </div>
   );
@@ -42,8 +50,8 @@ export function Tabs({ items, active, onChange, className }) {
             aria-selected={on}
             onClick={() => onChange?.(t.id)}
             className={cx(
-              'flex-1 rounded-full px-3 py-1.5 text-sm font-medium transition-colors motion-reduce:transition-none',
-              on ? 'bg-white/15 text-white' : 'text-white/60 hover:text-white',
+              'flex-1 rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 motion-reduce:transition-none',
+              on ? 'bg-white/15 text-white shadow-sm' : 'text-white/60 hover:text-white',
             )}
           >
             {t.label}
@@ -57,12 +65,17 @@ export function Tabs({ items, active, onChange, className }) {
 /** Prev/next + page indicator. 1-based `page`, `pages` total. */
 export function Pagination({ page, pages, onChange, className }) {
   const go = (p) => p >= 1 && p <= pages && onChange?.(p);
-  const btn = 'rounded-full px-3 py-1 text-sm text-white/80 enabled:hover:bg-white/10 disabled:opacity-40';
+  const btn =
+    'inline-flex h-8 w-8 items-center justify-center rounded-full text-white/80 transition-colors duration-200 enabled:hover:bg-white/10 enabled:hover:text-white disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 motion-reduce:transition-none';
   return (
     <div className={cx('flex items-center justify-center gap-2', className)}>
-      <button type="button" className={btn} disabled={page <= 1} onClick={() => go(page - 1)} aria-label="Previous">‹</button>
-      <span className="text-xs text-white/60">{page} / {pages}</span>
-      <button type="button" className={btn} disabled={page >= pages} onClick={() => go(page + 1)} aria-label="Next">›</button>
+      <button type="button" className={btn} disabled={page <= 1} onClick={() => go(page - 1)} aria-label="Previous">
+        <ChevronLeft className="h-4 w-4" />
+      </button>
+      <span className="text-xs tabular-nums text-white/60">{page} / {pages}</span>
+      <button type="button" className={btn} disabled={page >= pages} onClick={() => go(page + 1)} aria-label="Next">
+        <ChevronRight className="h-4 w-4" />
+      </button>
     </div>
   );
 }

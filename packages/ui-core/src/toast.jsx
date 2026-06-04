@@ -11,22 +11,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Button } from './button.jsx';
+import { CheckCircle, InfoCircle, WarnTriangle, XCircle, XMark } from './glyphs.jsx';
 import { cx } from './index.js';
 import { IconButton } from './icon-button.jsx';
-
-const g = (path, opts = {}) => function Glyph({ className }) {
-  return (
-    <svg viewBox="0 0 20 20" fill={opts.stroke ? 'none' : 'currentColor'} stroke={opts.stroke ? 'currentColor' : undefined} strokeWidth={opts.stroke ? 2 : undefined} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className}>
-      <path fillRule={opts.stroke ? undefined : 'evenodd'} clipRule={opts.stroke ? undefined : 'evenodd'} d={path} />
-    </svg>
-  );
-};
-
-const CheckCircle = g('M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.7-9.3a1 1 0 0 0-1.4-1.4L9 10.6 7.7 9.3a1 1 0 0 0-1.4 1.4l2 2a1 1 0 0 0 1.4 0l4-4Z');
-const XCircle = g('M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.7 7.3a1 1 0 0 0-1.4 1.4L8.6 10l-1.3 1.3a1 1 0 1 0 1.4 1.4L10 11.4l1.3 1.3a1 1 0 0 0 1.4-1.4L11.4 10l1.3-1.3a1 1 0 0 0-1.4-1.4L10 8.6 8.7 7.3Z');
-const WarnTriangle = g('M8.26 3.1c.77-1.33 2.71-1.33 3.48 0l5.58 9.65c.77 1.33-.19 3-1.74 3H4.42c-1.55 0-2.51-1.67-1.74-3L8.26 3.1ZM10 7a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0V8a1 1 0 0 0-1-1Zm0 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z');
-const InfoCircle = g('M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0-12a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm1 4a1 1 0 1 0-2 0v3a1 1 0 1 0 2 0v-3Z');
-const XMark = g('M6 6l8 8M14 6l-8 8', { stroke: true });
 
 const TYPE_GLYPH = { success: CheckCircle, error: XCircle, warning: WarnTriangle, info: InfoCircle };
 
