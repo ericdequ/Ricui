@@ -30,6 +30,9 @@ export { StatusBanner } from './status-banner.jsx';
 export { StateCard } from './state-card.jsx';
 // Glassy page-dot pager (distinct from the simple `Pagination`).
 export { PaginationControls, PaginationDot } from './pagination-controls.jsx';
+// Loading ring + the animated toast system (container + queue hook).
+export { Spinner } from './spinner.jsx';
+export { ToastContainer, useToast } from './toast.jsx';
 // SectionHeader is BEV's compact eyebrow label (replaced the title+subtitle one);
 // SectionEyebrow + AccentBadge are the bar-tab micro-labels.
 export { SectionHeader } from './section-header.jsx';
