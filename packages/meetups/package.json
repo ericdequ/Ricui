@@ -8,11 +8,23 @@
     "./react": "./src/react.jsx"
   },
   "dependencies": {
-    "@ric/places": "*",
-    "@ric/ui-core": "*",
-    "@ric/ui-tokens": "*"
+    "@ric/places": "^0.1.0",
+    "@ric/ui-core": "^0.1.0",
+    "@ric/ui-tokens": "^0.1.0"
   },
   "peerDependencies": {
     "react": ">=18"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericdequ/Ricui.git",
+    "directory": "packages/meetups"
+  },
+  "license": "MIT",
+  "files": [
+    "src"
+  ]
 }

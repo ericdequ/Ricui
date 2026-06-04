@@ -6,5 +6,17 @@
   "exports": {
     ".": "./src/index.js",
     "./tailwind": "./src/tailwind-preset.js"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericdequ/Ricui.git",
+    "directory": "packages/ui-tokens"
+  },
+  "license": "MIT",
+  "files": [
+    "src"
+  ]
 }

@@ -15,6 +15,8 @@ import { cx, toneChipClass } from './index.js';
 
 // Form + section primitives (migrated from BEV src/ui).
 export { Toggle, FieldFeedback, Input, Textarea, SectionHeader, StatusBanner } from './forms.jsx';
+// Overlays, nav, display (migrated from BEV src/ui).
+export { Modal, BottomSheet, Toast, Tabs, Pagination, StarRating } from './more.jsx';
 
 const PILL_SIZE = {
   xs: 'px-1.5 py-0.5 text-[10px] gap-1',

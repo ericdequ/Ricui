@@ -5,5 +5,17 @@
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericdequ/Ricui.git",
+    "directory": "packages/emoji"
+  },
+  "license": "MIT",
+  "files": [
+    "src"
+  ]
 }
