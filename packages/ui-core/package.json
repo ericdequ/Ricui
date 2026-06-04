@@ -12,7 +12,13 @@
     "@ric/ui-tokens": "^0.1.0"
   },
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=18",
+    "react-virtuoso": ">=4"
+  },
+  "peerDependenciesMeta": {
+    "react-virtuoso": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public"

@@ -18,6 +18,8 @@ import { cx, toneChipClass } from './index.js';
 export { cx } from './index.js';
 // Glass surfaces — need '@ric/ui-core/styles.css' for the data-tone glass system.
 export { GlassPanel, InsetPanel, SelectableGlassCard, ToneButton, TonePill } from './glass-panel.jsx';
+// VirtualizedList — needs react-virtuoso (optional peer dep) when it virtualizes.
+export { VirtualizedList } from './virtualized-list.jsx';
 
 // Form + section primitives (migrated from BEV src/ui).
 export { FieldFeedback, Input, StatusBanner,Textarea } from './forms.jsx';
