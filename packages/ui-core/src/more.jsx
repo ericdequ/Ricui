@@ -124,17 +124,5 @@ export function Pagination({ page, pages, onChange, className }) {
   );
 }
 
-/** Read-only star rating display (0–`max`). */
-export function StarRating({ value = 0, max = 5, size = 'md', showValue = false, className }) {
-  const px = size === 'sm' ? 'text-sm' : size === 'lg' ? 'text-xl' : 'text-base';
-  const full = Math.round(Math.max(0, Math.min(max, value)));
-  return (
-    <span className={cx('inline-flex items-center gap-1', px, className)} aria-label={`${value} out of ${max} stars`}>
-      <span aria-hidden="true" className="text-amber-300">
-        {'★'.repeat(full)}
-        <span className="text-white/20">{'★'.repeat(max - full)}</span>
-      </span>
-      {showValue ? <span className="text-xs font-semibold text-white">{value.toFixed(1)}</span> : null}
-    </span>
-  );
-}
+// StarRating moved to ./star-rating.jsx — the precise fractional (SVG gradient)
+// version upstreamed from BEV, replacing this ★-glyph rounding one.

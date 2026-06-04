@@ -19,7 +19,9 @@ export { FieldFeedback, Input, SectionHeader, StatusBanner,Textarea } from './fo
 export { Toggle, ToggleGlyph } from './toggle.jsx';
 export { BrandGradient } from './brand.jsx';
 // Overlays, nav, display (migrated from BEV src/ui).
-export { BottomSheet, Modal, Pagination, StarRating,Tabs, Toast } from './more.jsx';
+export { BottomSheet, Modal, Pagination, Tabs, Toast } from './more.jsx';
+// StarRating — precise fractional version upstreamed from BEV (was ★-rounded).
+export { StarRating } from './star-rating.jsx';
 // Button — CSS-first; needs the '@ric/ui-core/styles.css' import for ripple/sheen.
 export { Button } from './button.jsx';
 // Composite nav/flow primitives.
