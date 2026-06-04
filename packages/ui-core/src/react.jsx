@@ -98,6 +98,56 @@ export function Badge({ tone, variant, className, children, ...rest }) {
   );
 }
 
+const COUNT_TONE = {
+  slate: 'border-white/15 bg-white/10 text-white',
+  rose: 'border-rose-300/40 bg-rose-500/95 text-white',
+  emerald: 'border-emerald-300/40 bg-emerald-500/95 text-white',
+  amber: 'border-amber-300/40 bg-amber-500/95 text-white',
+  fuchsia: 'border-fuchsia-300/40 bg-fuchsia-500/95 text-white',
+  violet: 'border-violet-300/40 bg-violet-500/95 text-white',
+  cyan: 'border-cyan-300/40 bg-cyan-500/95 text-white',
+  sky: 'border-sky-300/40 bg-sky-500/95 text-white',
+};
+
+const COUNT_SIZE = {
+  xs: 'h-4 min-w-[16px] px-1 text-[9px]',
+  sm: 'h-5 min-w-[20px] px-1.5 text-[10px]',
+  md: 'h-6 min-w-[24px] px-2 text-xs',
+};
+
+/**
+ * Tiny numeric badge ("5" / "12" / "99+") for bells, tabs, presence. Renders
+ * NOTHING when count is nullish or ≤ 0 (strict-addition: never an empty "0"),
+ * and caps at `max` with a "+" suffix. Solid fills (not chip tones) so it reads
+ * clearly when clipped onto a Pill or IconButton.
+ *
+ * @param {object} props
+ * @param {number|null|undefined} props.count - Nullish or ≤ 0 renders nothing.
+ * @param {number} [props.max] - Above this, display as `${max}+` (default 99).
+ * @param {'slate'|'rose'|'emerald'|'amber'|'fuchsia'|'violet'|'cyan'|'sky'} [props.tone]
+ * @param {'xs'|'sm'|'md'} [props.size]
+ * @param {string} [props.className]
+ * @param {string} [props.ariaLabel] - Overrides the default "N items" label.
+ */
+export function CountBadge({ count, max = 99, tone = 'rose', size = 'sm', className, ariaLabel }) {
+  const numeric = Number(count);
+  if (!Number.isFinite(numeric) || numeric <= 0) return null;
+  const display = numeric > max ? `${max}+` : String(numeric);
+  return (
+    <span
+      aria-label={ariaLabel || `${numeric} ${numeric === 1 ? 'item' : 'items'}`}
+      className={cx(
+        'inline-flex items-center justify-center rounded-full border font-black tabular-nums',
+        COUNT_TONE[tone] || COUNT_TONE.rose,
+        COUNT_SIZE[size] || COUNT_SIZE.sm,
+        className,
+      )}
+    >
+      {display}
+    </span>
+  );
+}
+
 const ICONBTN_TONE = {
   slate: 'text-slate-200 hover:bg-slate-500/20',
   emerald: 'text-emerald-200 hover:bg-emerald-500/20',
