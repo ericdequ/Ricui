@@ -1,73 +1,16 @@
 // =============================================================================
 // @ric/ui-core/react — overlays, nav, and display primitives (migrated from BEV)
 // =============================================================================
-// Modal, BottomSheet, Toast, Tabs, Pagination, StarRating. De-BEV'd, prop-driven,
-// CSS transitions (no framer-motion), React peer only (no react-dom portal — a
-// consumer can wrap in its own portal if needed). Re-exported from ./react.jsx.
+// Toast, Tabs, Pagination. De-BEV'd, prop-driven, CSS transitions (no framer).
+// (Modal/BottomSheet → ./modal.jsx; StarRating → ./star-rating.jsx.)
+// Re-exported from ./react.jsx.
 // =============================================================================
-
-import { useEffect } from 'react';
 
 import { cx, toneChipClass } from './index.js';
 
-function useEscape(active, onClose) {
-  useEffect(() => {
-    if (!active) return undefined;
-    const onKey = (e) => e.key === 'Escape' && onClose?.();
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [active, onClose]);
-}
-
-const OVERLAY = 'fixed inset-0 z-50 bg-black/60 backdrop-blur-sm';
-
-/** Centered modal dialog. Renders nothing when `open` is false. */
-export function Modal({ open, onClose, title, children, footer, className }) {
-  useEscape(open, onClose);
-  if (!open) return null;
-  return (
-    <div className={OVERLAY} onClick={onClose} role="presentation">
-      <div className="flex min-h-full items-center justify-center p-4">
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={typeof title === 'string' ? title : undefined}
-          onClick={(e) => e.stopPropagation()}
-          className={cx('w-full max-w-md rounded-2xl border border-white/10 bg-slate-900 p-4 text-white shadow-2xl', className)}
-        >
-          {title ? <h2 className="mb-3 text-lg font-semibold">{title}</h2> : null}
-          <div>{children}</div>
-          {footer ? <div className="mt-4 flex justify-end gap-2">{footer}</div> : null}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/** Bottom sheet that slides up from the edge. */
-export function BottomSheet({ open, onClose, title, children, className }) {
-  useEscape(open, onClose);
-  if (!open) return null;
-  return (
-    <div className={OVERLAY} onClick={onClose} role="presentation">
-      <div className="flex min-h-full items-end justify-center">
-        <div
-          role="dialog"
-          aria-modal="true"
-          onClick={(e) => e.stopPropagation()}
-          className={cx(
-            'w-full max-w-lg rounded-t-3xl border-t border-white/10 bg-slate-900 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] text-white',
-            className,
-          )}
-        >
-          <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/20" aria-hidden="true" />
-          {title ? <h2 className="mb-2 text-base font-semibold">{title}</h2> : null}
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
+// Modal + BottomSheet moved to ./modal.jsx — the full portal modal system
+// (center/bottom-sheet/top/fullscreen, framer→CSS drag-to-dismiss + a11y)
+// upstreamed from BEV, replacing these lean overlays.
 
 /** A single toast. The app owns the queue/positioning; this renders one. */
 export function Toast({ tone, variant, icon, children, onDismiss, className }) {

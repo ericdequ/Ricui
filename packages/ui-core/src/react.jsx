@@ -33,7 +33,10 @@ export { AccentBadge, SectionEyebrow } from './tab-primitives.jsx';
 export { Toggle, ToggleGlyph } from './toggle.jsx';
 export { BrandGradient } from './brand.jsx';
 // Overlays, nav, display (migrated from BEV src/ui).
-export { BottomSheet, Modal, Pagination, Tabs, Toast } from './more.jsx';
+export { Pagination, Tabs, Toast } from './more.jsx';
+// Modal system — portal modal (center/bottom-sheet/top/full), framer→CSS, with
+// drag-to-dismiss + a11y. Needs no extra CSS (Tailwind transitions inline).
+export { BottomSheet, ConfirmModal, Modal } from './modal.jsx';
 // StarRating — precise fractional version upstreamed from BEV (was ★-rounded).
 export { StarRating } from './star-rating.jsx';
 // Button — CSS-first; needs the '@ric/ui-core/styles.css' import for ripple/sheen.
