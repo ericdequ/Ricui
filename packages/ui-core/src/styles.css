@@ -98,7 +98,7 @@
 /* =============================================================================
  * glass system — upstreamed verbatim from BEV src/styles/system/glass.css
  * Data-attribute-driven glass tones (each surface its own namespace). Reads
- * Tailwind --color-* tokens; declares its own --btn-*/--action-* per tone.
+ * Tailwind --color-x tokens; declares its own --btn-x and --action-x per tone.
  * ========================================================================== */
 /* =============================================================================
    /styles/system/glass.css
