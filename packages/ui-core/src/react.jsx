@@ -13,6 +13,9 @@ import { ICON_SIZE, MOTION, resolveTone } from '@ric/ui-tokens';
 
 import { cx, toneChipClass } from './index.js';
 
+// Form + section primitives (migrated from BEV src/ui).
+export { Toggle, FieldFeedback, Input, Textarea, SectionHeader, StatusBanner } from './forms.jsx';
+
 const PILL_SIZE = {
   xs: 'px-1.5 py-0.5 text-[10px] gap-1',
   sm: 'px-2 py-0.5 text-[11px] gap-1',
