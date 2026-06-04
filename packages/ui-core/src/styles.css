@@ -94,3 +94,718 @@
     animation: none;
   }
 }
+
+/* =============================================================================
+ * glass system — upstreamed verbatim from BEV src/styles/system/glass.css
+ * Data-attribute-driven glass tones (each surface its own namespace). Reads
+ * Tailwind --color-* tokens; declares its own --btn-*/--action-* per tone.
+ * ========================================================================== */
+/* =============================================================================
+   /styles/system/glass.css
+   -----------------------------------------------------------------------------
+   Glass-system tones — the CSS reincarnation of glass.js. Six independent
+   surfaces, each driven by its own data-attribute namespace so they can
+   coexist on the same DOM tree without var collisions:
+
+     [data-glass-tone]              .glass-panel + .glass-panel-glow
+     [data-tone-pill-theme] +
+     [data-tone-pill-tone]          .tone-pill
+     [data-tone-button-tone] +
+     [data-tone-button-variant]     .tone-button-tone
+     [data-tone-button-size]        .tone-button-size
+     [data-inset-tone]              .inset-panel
+     [data-selectable-tone]         .selectable-icon-shell
+     [data-action-tone]             .action-button
+
+   Each tone block declares the minimal vars its part rule reads; rules use
+   color-mix(in oklab, …, transparent) for alpha modulation against the
+   Tailwind v4 oklch color palette.
+============================================================================= */
+
+/* === GlassPanel tones (frame + glow) ===================================== */
+
+[data-glass-tone='neutral'] {
+  --glass-frame-border: rgb(255 255 255 / 0.14);
+  --glass-frame-bg: rgb(255 255 255 / 0.06);
+  --glass-glow: radial-gradient(
+    circle at top left,
+    rgb(255 255 255 / 0.14),
+    transparent 42%
+  );
+}
+[data-glass-tone='slate'] {
+  --glass-frame-border: color-mix(
+    in oklab,
+    var(--color-slate-800) 90%,
+    transparent
+  );
+  --glass-frame-bg: color-mix(
+    in oklab,
+    var(--color-slate-950) 72%,
+    transparent
+  );
+  --glass-glow: radial-gradient(
+    circle at top left,
+    color-mix(in oklab, var(--color-slate-400) 16%, transparent),
+    transparent 42%
+  );
+}
+[data-glass-tone='fuchsia'] {
+  --glass-frame-border: color-mix(
+    in oklab,
+    var(--color-fuchsia-300) 24%,
+    transparent
+  );
+  --glass-frame-bg: color-mix(
+    in oklab,
+    var(--color-fuchsia-500) 8%,
+    transparent
+  );
+  --glass-glow: radial-gradient(
+    circle at top left,
+    color-mix(in oklab, var(--color-fuchsia-500) 22%, transparent),
+    transparent 44%
+  );
+}
+[data-glass-tone='cyan'] {
+  --glass-frame-border: color-mix(
+    in oklab,
+    var(--color-cyan-300) 24%,
+    transparent
+  );
+  --glass-frame-bg: color-mix(in oklab, var(--color-cyan-500) 8%, transparent);
+  --glass-glow: radial-gradient(
+    circle at top left,
+    color-mix(in oklab, var(--color-cyan-400) 22%, transparent),
+    transparent 44%
+  );
+}
+[data-glass-tone='amber'] {
+  --glass-frame-border: color-mix(
+    in oklab,
+    var(--color-amber-300) 24%,
+    transparent
+  );
+  --glass-frame-bg: color-mix(in oklab, var(--color-amber-500) 8%, transparent);
+  --glass-glow: radial-gradient(
+    circle at top left,
+    color-mix(in oklab, var(--color-amber-400) 20%, transparent),
+    transparent 44%
+  );
+}
+[data-glass-tone='emerald'] {
+  --glass-frame-border: color-mix(
+    in oklab,
+    var(--color-emerald-300) 24%,
+    transparent
+  );
+  --glass-frame-bg: color-mix(
+    in oklab,
+    var(--color-emerald-500) 8%,
+    transparent
+  );
+  --glass-glow: radial-gradient(
+    circle at top left,
+    color-mix(in oklab, var(--color-emerald-500) 20%, transparent),
+    transparent 44%
+  );
+}
+[data-glass-tone='rose'] {
+  --glass-frame-border: color-mix(
+    in oklab,
+    var(--color-rose-300) 24%,
+    transparent
+  );
+  --glass-frame-bg: color-mix(in oklab, var(--color-rose-500) 8%, transparent);
+  --glass-glow: radial-gradient(
+    circle at top left,
+    color-mix(in oklab, var(--color-rose-500) 20%, transparent),
+    transparent 44%
+  );
+}
+
+.glass-panel {
+  border-color: var(--glass-frame-border);
+  background-color: var(--glass-frame-bg);
+}
+.glass-panel-glow {
+  background-image: var(--glass-glow);
+}
+
+/* === TonePill (theme × tone) ============================================= */
+
+/* Dark theme — alpha-modulated border + bg, /100 text. */
+[data-tone-pill-theme='dark'][data-tone-pill-tone='slate'] {
+  --pill-border: rgb(255 255 255 / 0.1);
+  --pill-bg: rgb(255 255 255 / 0.05);
+  --pill-text: rgb(255 255 255 / 0.75);
+}
+[data-tone-pill-theme='dark'][data-tone-pill-tone='emerald'] {
+  --pill-border: color-mix(in oklab, var(--color-emerald-400) 25%, transparent);
+  --pill-bg: color-mix(in oklab, var(--color-emerald-500) 10%, transparent);
+  --pill-text: var(--color-emerald-100);
+}
+[data-tone-pill-theme='dark'][data-tone-pill-tone='amber'] {
+  --pill-border: color-mix(in oklab, var(--color-amber-400) 25%, transparent);
+  --pill-bg: color-mix(in oklab, var(--color-amber-500) 10%, transparent);
+  --pill-text: var(--color-amber-100);
+}
+[data-tone-pill-theme='dark'][data-tone-pill-tone='rose'] {
+  --pill-border: color-mix(in oklab, var(--color-rose-400) 25%, transparent);
+  --pill-bg: color-mix(in oklab, var(--color-rose-500) 10%, transparent);
+  --pill-text: var(--color-rose-100);
+}
+[data-tone-pill-theme='dark'][data-tone-pill-tone='sky'] {
+  --pill-border: color-mix(in oklab, var(--color-sky-400) 25%, transparent);
+  --pill-bg: color-mix(in oklab, var(--color-sky-500) 10%, transparent);
+  --pill-text: var(--color-sky-100);
+}
+[data-tone-pill-theme='dark'][data-tone-pill-tone='cyan'] {
+  --pill-border: color-mix(in oklab, var(--color-cyan-400) 25%, transparent);
+  --pill-bg: color-mix(in oklab, var(--color-cyan-500) 10%, transparent);
+  --pill-text: var(--color-cyan-100);
+}
+[data-tone-pill-theme='dark'][data-tone-pill-tone='fuchsia'] {
+  --pill-border: color-mix(in oklab, var(--color-fuchsia-400) 25%, transparent);
+  --pill-bg: color-mix(in oklab, var(--color-fuchsia-500) 10%, transparent);
+  --pill-text: var(--color-fuchsia-100);
+}
+[data-tone-pill-theme='dark'][data-tone-pill-tone='blue'] {
+  --pill-border: color-mix(in oklab, var(--color-blue-400) 25%, transparent);
+  --pill-bg: color-mix(in oklab, var(--color-blue-500) 10%, transparent);
+  --pill-text: var(--color-blue-100);
+}
+[data-tone-pill-theme='dark'][data-tone-pill-tone='indigo'] {
+  --pill-border: color-mix(in oklab, var(--color-indigo-400) 25%, transparent);
+  --pill-bg: color-mix(in oklab, var(--color-indigo-500) 10%, transparent);
+  --pill-text: var(--color-indigo-100);
+}
+
+/* Light theme — solid /200 border, /50 bg, /700 text. */
+[data-tone-pill-theme='light'][data-tone-pill-tone='slate'] {
+  --pill-border: var(--color-slate-200);
+  --pill-bg: var(--color-slate-50);
+  --pill-text: var(--color-slate-700);
+}
+[data-tone-pill-theme='light'][data-tone-pill-tone='emerald'] {
+  --pill-border: var(--color-emerald-200);
+  --pill-bg: var(--color-emerald-50);
+  --pill-text: var(--color-emerald-700);
+}
+[data-tone-pill-theme='light'][data-tone-pill-tone='amber'] {
+  --pill-border: var(--color-amber-200);
+  --pill-bg: var(--color-amber-50);
+  --pill-text: var(--color-amber-700);
+}
+[data-tone-pill-theme='light'][data-tone-pill-tone='rose'] {
+  --pill-border: var(--color-rose-200);
+  --pill-bg: var(--color-rose-50);
+  --pill-text: var(--color-rose-700);
+}
+[data-tone-pill-theme='light'][data-tone-pill-tone='sky'] {
+  --pill-border: var(--color-sky-200);
+  --pill-bg: var(--color-sky-50);
+  --pill-text: var(--color-sky-700);
+}
+[data-tone-pill-theme='light'][data-tone-pill-tone='cyan'] {
+  --pill-border: var(--color-cyan-200);
+  --pill-bg: var(--color-cyan-50);
+  --pill-text: var(--color-cyan-700);
+}
+[data-tone-pill-theme='light'][data-tone-pill-tone='fuchsia'] {
+  --pill-border: var(--color-fuchsia-200);
+  --pill-bg: var(--color-fuchsia-50);
+  --pill-text: var(--color-fuchsia-700);
+}
+[data-tone-pill-theme='light'][data-tone-pill-tone='blue'] {
+  --pill-border: var(--color-blue-200);
+  --pill-bg: var(--color-blue-50);
+  --pill-text: var(--color-blue-700);
+}
+[data-tone-pill-theme='light'][data-tone-pill-tone='indigo'] {
+  --pill-border: var(--color-indigo-200);
+  --pill-bg: var(--color-indigo-50);
+  --pill-text: var(--color-indigo-700);
+}
+
+.tone-pill {
+  border-color: var(--pill-border);
+  background-color: var(--pill-bg);
+  color: var(--pill-text);
+}
+
+/* === ToneButton (tone × variant + size) ================================== */
+
+/* Sizes (3) — pure structural utility, no tone interaction. */
+[data-tone-button-size='sm'] {
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+}
+[data-tone-button-size='md'] {
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+}
+[data-tone-button-size='lg'] {
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Soft variant — alpha-modulated tone fill that brightens on hover. */
+[data-tone-button-variant='soft'][data-tone-button-tone='neutral'] {
+  --btn-border: rgb(255 255 255 / 0.15);
+  --btn-bg: rgb(255 255 255 / 0.1);
+  --btn-bg-hover: rgb(255 255 255 / 0.16);
+  --btn-text: white;
+  --btn-bg-image: none;
+}
+[data-tone-button-variant='soft'][data-tone-button-tone='fuchsia'] {
+  --btn-border: color-mix(in oklab, var(--color-fuchsia-300) 35%, transparent);
+  --btn-bg: color-mix(in oklab, var(--color-fuchsia-500) 14%, transparent);
+  --btn-bg-hover: color-mix(
+    in oklab,
+    var(--color-fuchsia-500) 22%,
+    transparent
+  );
+  --btn-text: var(--color-fuchsia-50);
+  --btn-bg-image: none;
+}
+/* Brand-primary purple — the canonical violet→indigo action hue used by the
+   like art, CreateMeetupButton, and meetup pills. Use this for primary CTAs
+   that should read as "BEV brand action" (e.g. Get Directions) instead of the
+   off-brand blue. */
+[data-tone-button-variant='soft'][data-tone-button-tone='violet'] {
+  --btn-border: color-mix(in oklab, var(--color-violet-300) 35%, transparent);
+  --btn-bg: color-mix(in oklab, var(--color-violet-500) 14%, transparent);
+  --btn-bg-hover: color-mix(in oklab, var(--color-violet-500) 22%, transparent);
+  --btn-text: var(--color-violet-50);
+  --btn-bg-image: none;
+}
+[data-tone-button-variant='soft'][data-tone-button-tone='cyan'] {
+  --btn-border: color-mix(in oklab, var(--color-cyan-300) 35%, transparent);
+  --btn-bg: color-mix(in oklab, var(--color-cyan-500) 14%, transparent);
+  --btn-bg-hover: color-mix(in oklab, var(--color-cyan-500) 22%, transparent);
+  --btn-text: var(--color-cyan-50);
+  --btn-bg-image: none;
+}
+[data-tone-button-variant='soft'][data-tone-button-tone='emerald'] {
+  --btn-border: color-mix(in oklab, var(--color-emerald-300) 35%, transparent);
+  --btn-bg: color-mix(in oklab, var(--color-emerald-500) 14%, transparent);
+  --btn-bg-hover: color-mix(
+    in oklab,
+    var(--color-emerald-500) 22%,
+    transparent
+  );
+  --btn-text: var(--color-emerald-50);
+  --btn-bg-image: none;
+}
+[data-tone-button-variant='soft'][data-tone-button-tone='amber'] {
+  --btn-border: color-mix(in oklab, var(--color-amber-300) 35%, transparent);
+  --btn-bg: color-mix(in oklab, var(--color-amber-500) 14%, transparent);
+  --btn-bg-hover: color-mix(in oklab, var(--color-amber-500) 22%, transparent);
+  --btn-text: var(--color-amber-50);
+  --btn-bg-image: none;
+}
+[data-tone-button-variant='soft'][data-tone-button-tone='blue'] {
+  --btn-border: color-mix(in oklab, var(--color-blue-300) 35%, transparent);
+  --btn-bg: color-mix(in oklab, var(--color-blue-500) 14%, transparent);
+  --btn-bg-hover: color-mix(in oklab, var(--color-blue-500) 22%, transparent);
+  --btn-text: var(--color-blue-50);
+  --btn-bg-image: none;
+}
+[data-tone-button-variant='soft'][data-tone-button-tone='rose'] {
+  --btn-border: color-mix(in oklab, var(--color-rose-300) 35%, transparent);
+  --btn-bg: color-mix(in oklab, var(--color-rose-500) 14%, transparent);
+  --btn-bg-hover: color-mix(in oklab, var(--color-rose-500) 22%, transparent);
+  --btn-text: var(--color-rose-50);
+  --btn-bg-image: none;
+}
+
+/* Solid variant — two-stop gradients with paired hover-brighten. */
+[data-tone-button-variant='solid'][data-tone-button-tone='neutral'] {
+  --btn-border: rgb(255 255 255 / 0.2);
+  --btn-bg: white;
+  --btn-bg-hover: var(--color-slate-100);
+  --btn-text: var(--color-slate-950);
+  --btn-bg-image: none;
+}
+[data-tone-button-variant='solid'][data-tone-button-tone='fuchsia'] {
+  --btn-border: color-mix(in oklab, var(--color-fuchsia-300) 45%, transparent);
+  --btn-text: white;
+  --btn-bg: transparent;
+  --btn-bg-image: linear-gradient(
+    to right,
+    var(--color-fuchsia-600),
+    var(--color-pink-600)
+  );
+  --btn-bg-image-hover: linear-gradient(
+    to right,
+    var(--color-fuchsia-500),
+    var(--color-pink-500)
+  );
+}
+[data-tone-button-variant='solid'][data-tone-button-tone='violet'] {
+  --btn-border: color-mix(in oklab, var(--color-violet-300) 45%, transparent);
+  --btn-text: white;
+  --btn-bg: transparent;
+  --btn-bg-image: linear-gradient(
+    to right,
+    var(--color-violet-600),
+    var(--color-indigo-600)
+  );
+  --btn-bg-image-hover: linear-gradient(
+    to right,
+    var(--color-violet-500),
+    var(--color-indigo-500)
+  );
+}
+[data-tone-button-variant='solid'][data-tone-button-tone='cyan'] {
+  --btn-border: color-mix(in oklab, var(--color-cyan-300) 45%, transparent);
+  --btn-text: white;
+  --btn-bg: transparent;
+  --btn-bg-image: linear-gradient(
+    to right,
+    var(--color-cyan-600),
+    var(--color-sky-600)
+  );
+  --btn-bg-image-hover: linear-gradient(
+    to right,
+    var(--color-cyan-500),
+    var(--color-sky-500)
+  );
+}
+[data-tone-button-variant='solid'][data-tone-button-tone='emerald'] {
+  --btn-border: color-mix(in oklab, var(--color-emerald-300) 45%, transparent);
+  --btn-text: white;
+  --btn-bg: transparent;
+  --btn-bg-image: linear-gradient(
+    to right,
+    var(--color-emerald-600),
+    var(--color-green-600)
+  );
+  --btn-bg-image-hover: linear-gradient(
+    to right,
+    var(--color-emerald-500),
+    var(--color-green-500)
+  );
+}
+[data-tone-button-variant='solid'][data-tone-button-tone='amber'] {
+  --btn-border: color-mix(in oklab, var(--color-amber-300) 45%, transparent);
+  --btn-text: white;
+  --btn-bg: transparent;
+  --btn-bg-image: linear-gradient(
+    to right,
+    var(--color-amber-500),
+    var(--color-orange-600)
+  );
+  --btn-bg-image-hover: linear-gradient(
+    to right,
+    var(--color-amber-400),
+    var(--color-orange-500)
+  );
+}
+[data-tone-button-variant='solid'][data-tone-button-tone='blue'] {
+  --btn-border: color-mix(in oklab, var(--color-blue-300) 45%, transparent);
+  --btn-text: white;
+  --btn-bg: transparent;
+  --btn-bg-image: linear-gradient(
+    to right,
+    var(--color-blue-600),
+    var(--color-cyan-600)
+  );
+  --btn-bg-image-hover: linear-gradient(
+    to right,
+    var(--color-blue-500),
+    var(--color-cyan-500)
+  );
+}
+[data-tone-button-variant='solid'][data-tone-button-tone='rose'] {
+  --btn-border: color-mix(in oklab, var(--color-rose-300) 45%, transparent);
+  --btn-text: white;
+  --btn-bg: transparent;
+  --btn-bg-image: linear-gradient(
+    to right,
+    var(--color-rose-600),
+    var(--color-pink-600)
+  );
+  --btn-bg-image-hover: linear-gradient(
+    to right,
+    var(--color-rose-500),
+    var(--color-pink-500)
+  );
+}
+
+.tone-button-tone {
+  border-color: var(--btn-border);
+  background-color: var(--btn-bg);
+  background-image: var(--btn-bg-image);
+  color: var(--btn-text);
+}
+.tone-button-tone:hover {
+  background-color: var(--btn-bg-hover, var(--btn-bg));
+  background-image: var(--btn-bg-image-hover, var(--btn-bg-image));
+}
+
+/* === InsetPanel tones ==================================================== */
+
+[data-inset-tone='neutral'] {
+  --inset-border: rgb(255 255 255 / 0.1);
+  --inset-bg: rgb(255 255 255 / 0.04);
+  --inset-border-style: solid;
+  --inset-shadow: 0 20px 55px rgb(0 0 0 / 0.18);
+}
+[data-inset-tone='cyan'] {
+  --inset-border: color-mix(in oklab, var(--color-cyan-300) 16%, transparent);
+  --inset-bg: color-mix(in oklab, var(--color-cyan-500) 5%, transparent);
+  --inset-border-style: solid;
+  --inset-shadow: 0 22px 58px rgb(0 0 0 / 0.18);
+}
+[data-inset-tone='dashed'] {
+  --inset-border: rgb(255 255 255 / 0.12);
+  --inset-bg: rgb(255 255 255 / 0.03);
+  --inset-border-style: dashed;
+  --inset-shadow: 0 18px 44px rgb(0 0 0 / 0.12);
+}
+
+.inset-panel {
+  border-style: var(--inset-border-style);
+  border-color: var(--inset-border);
+  background-color: var(--inset-bg);
+  box-shadow: var(--inset-shadow);
+}
+
+/* === SelectableGlassCard icon tint ====================================== */
+
+[data-selectable-tone='neutral'] {
+  --selectable-icon-color: white;
+}
+[data-selectable-tone='fuchsia'] {
+  --selectable-icon-color: var(--color-fuchsia-100);
+}
+[data-selectable-tone='cyan'] {
+  --selectable-icon-color: var(--color-cyan-100);
+}
+[data-selectable-tone='emerald'] {
+  --selectable-icon-color: var(--color-emerald-100);
+}
+[data-selectable-tone='amber'] {
+  --selectable-icon-color: var(--color-amber-100);
+}
+[data-selectable-tone='blue'] {
+  --selectable-icon-color: var(--color-blue-100);
+}
+
+.selectable-icon-shell {
+  color: var(--selectable-icon-color);
+}
+
+/* === Action button (hero CTA) ============================================ */
+
+/* These gradients are intentional brand statements — kept as 8 named tones
+   with their original 3-stop linear-gradients preserved. Hover lift + tone
+   border glow are baked in. Use via the `.action-button` base class plus
+   `data-action-tone={tone}`. */
+
+.action-button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  white-space: nowrap;
+  border-radius: 1rem;
+  border: 1px solid var(--action-border);
+  padding: 0.625rem 0.875rem;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--action-text, white);
+  background-image: var(--action-bg);
+  box-shadow: var(--action-shadow);
+  transition: all 0.2s ease;
+}
+.action-button:active {
+  scale: 0.98;
+}
+.action-button:hover {
+  transform: translateY(-0.125rem);
+  border-color: var(--action-border-hover, var(--action-border));
+  filter: brightness(var(--action-brightness-hover, 1.04));
+  background-image: var(--action-bg-hover, var(--action-bg));
+}
+.action-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  box-shadow: none;
+  transform: none;
+}
+
+.action-tone-primary {
+  --action-border: color-mix(
+    in oklab,
+    var(--color-violet-300) 26%,
+    transparent
+  );
+  --action-border-hover: color-mix(
+    in oklab,
+    var(--color-violet-200) 30%,
+    transparent
+  );
+  --action-bg: linear-gradient(
+    135deg,
+    rgb(139 92 246 / 0.96),
+    rgb(79 70 229 / 0.92),
+    rgb(37 99 235 / 0.84)
+  );
+  --action-shadow: 0 18px 36px rgb(79 70 229 / 0.28);
+}
+.action-tone-success {
+  --action-border: color-mix(
+    in oklab,
+    var(--color-emerald-300) 26%,
+    transparent
+  );
+  --action-border-hover: color-mix(
+    in oklab,
+    var(--color-emerald-200) 32%,
+    transparent
+  );
+  --action-bg: linear-gradient(
+    135deg,
+    rgb(16 185 129 / 0.98),
+    rgb(5 150 105 / 0.94),
+    rgb(6 95 70 / 0.9)
+  );
+  --action-shadow: 0 18px 34px rgb(5 150 105 / 0.24);
+  --action-brightness-hover: 1.03;
+}
+.action-tone-info {
+  --action-border: color-mix(in oklab, var(--color-sky-300) 24%, transparent);
+  --action-border-hover: color-mix(
+    in oklab,
+    var(--color-sky-200) 30%,
+    transparent
+  );
+  --action-bg: linear-gradient(
+    135deg,
+    rgb(59 130 246 / 0.96),
+    rgb(37 99 235 / 0.92),
+    rgb(29 78 216 / 0.86)
+  );
+  --action-shadow: 0 18px 34px rgb(37 99 235 / 0.26);
+}
+.action-tone-secondary {
+  --action-border: rgb(255 255 255 / 0.1);
+  --action-border-hover: rgb(255 255 255 / 0.18);
+  --action-text: var(--color-slate-100);
+  --action-bg: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.06),
+    rgb(15 23 42 / 0.5)
+  );
+  --action-bg-hover: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.09),
+    rgb(15 23 42 / 0.6)
+  );
+  --action-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06), 0 10px 22px rgb(2 6 23 / 0.16);
+}
+.action-tone-muted {
+  --action-border: color-mix(in oklab, var(--color-slate-700) 70%, transparent);
+  --action-border-hover: color-mix(
+    in oklab,
+    var(--color-slate-500) 80%,
+    transparent
+  );
+  --action-text: var(--color-slate-200);
+  --action-bg: color-mix(in oklab, var(--color-slate-950) 72%, transparent);
+  --action-bg-hover: color-mix(
+    in oklab,
+    var(--color-slate-900) 80%,
+    transparent
+  );
+  --action-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+}
+.action-tone-danger {
+  --action-border: color-mix(in oklab, var(--color-rose-400) 26%, transparent);
+  --action-border-hover: color-mix(
+    in oklab,
+    var(--color-rose-300) 34%,
+    transparent
+  );
+  --action-text: var(--color-rose-100);
+  --action-bg: linear-gradient(
+    180deg,
+    rgb(159 18 57 / 0.18),
+    rgb(15 23 42 / 0.62)
+  );
+  --action-bg-hover: linear-gradient(
+    180deg,
+    rgb(190 24 93 / 0.2),
+    rgb(15 23 42 / 0.68)
+  );
+  --action-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+}
+.action-tone-social {
+  --action-border: rgb(255 255 255 / 0.14);
+  --action-bg: linear-gradient(
+    135deg,
+    rgb(217 70 239 / 0.85),
+    rgb(34 211 238 / 0.85)
+  );
+  --action-shadow: 0 18px 36px rgb(217 70 239 / 0.28);
+}
+.action-tone-violet-smooth {
+  --action-border: color-mix(
+    in oklab,
+    var(--color-violet-300) 22%,
+    transparent
+  );
+  --action-border-hover: color-mix(
+    in oklab,
+    var(--color-violet-200) 32%,
+    transparent
+  );
+  --action-text: var(--color-violet-50);
+  --action-bg: linear-gradient(
+    135deg,
+    rgb(168 85 247 / 0.88),
+    rgb(139 92 246 / 0.82),
+    rgb(99 102 241 / 0.74)
+  );
+  --action-shadow: 0 10px 24px rgb(139 92 246 / 0.22);
+  --action-brightness-hover: 1.06;
+}
+.action-tone-violet-ghost {
+  --action-border: color-mix(
+    in oklab,
+    var(--color-violet-300) 14%,
+    transparent
+  );
+  --action-border-hover: color-mix(
+    in oklab,
+    var(--color-violet-300) 26%,
+    transparent
+  );
+  --action-text: color-mix(in oklab, var(--color-violet-100) 90%, transparent);
+  --action-bg: linear-gradient(
+    180deg,
+    rgb(139 92 246 / 0.12),
+    rgb(15 23 42 / 0.55)
+  );
+  --action-bg-hover: linear-gradient(
+    180deg,
+    rgb(139 92 246 / 0.2),
+    rgb(15 23 42 / 0.6)
+  );
+  --action-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+}
+
+/* display typography used by the glass primitives (from BEV globals.css; var
+ * fallbacks keep them sane when a consumer hasn't set the brand font vars) */
+.font-display-title { font-family: var(--font-display, inherit); letter-spacing: var(--title-tracking, -0.02em); line-height: 0.98; text-wrap: balance; }
+.font-display-label { font-family: var(--font-display, inherit); letter-spacing: var(--label-tracking, 0.08em); text-transform: uppercase; }
+.text-copy-soft { letter-spacing: var(--copy-tracking, 0); }

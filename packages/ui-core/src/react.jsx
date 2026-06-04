@@ -13,6 +13,12 @@ import { MOTION } from '@ric/ui-tokens';
 
 import { cx, toneChipClass } from './index.js';
 
+// Re-export the class-name helper through the React barrel so consumers can pull
+// `cx` from '@ric/ui/react' alongside components (BEV's @/ui/GlassPanel shim).
+export { cx } from './index.js';
+// Glass surfaces — need '@ric/ui-core/styles.css' for the data-tone glass system.
+export { GlassPanel, InsetPanel, SelectableGlassCard, ToneButton, TonePill } from './glass-panel.jsx';
+
 // Form + section primitives (migrated from BEV src/ui).
 export { FieldFeedback, Input, StatusBanner,Textarea } from './forms.jsx';
 // SectionHeader is BEV's compact eyebrow label (replaced the title+subtitle one);
