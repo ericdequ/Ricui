@@ -78,10 +78,10 @@ const PRESS = {
 const ICON_BOX = {
   xs: 'h-3.5 w-3.5',
   sm: 'h-4 w-4',
-  md: 'h-[18px] w-[18px]',
-  lg: 'h-5 w-5',
-  xl: 'h-[22px] w-[22px]',
-  none: 'h-4 w-4',
+  md: 'h-5 w-5',
+  lg: 'h-[22px] w-[22px]',
+  xl: 'h-6 w-6',
+  none: 'h-3.5 w-3.5',
 };
 
 /** Pure-CSS ring spinner that inherits the button's text color + icon box. */
