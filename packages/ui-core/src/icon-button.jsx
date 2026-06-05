@@ -15,6 +15,7 @@
 import { forwardRef, isValidElement, useCallback, useRef } from 'react';
 
 import { cx } from './index.js';
+import { Spinner } from './spinner.jsx';
 
 const TONES = {
   plain: 'border-transparent bg-transparent text-white/65 shadow-none hover:bg-white/[0.08] hover:text-white',
@@ -49,17 +50,20 @@ const resolveTone = (tone, variant) => {
  * @param {string} [props.label] - Accessible label (legacy @ric name).
  * @param {string} [props.ariaLabel] - Accessible label (preferred).
  * @param {string} [props.tooltip] - Native title + label fallback.
+ * @param {boolean} [props.loading] - Show a spinner + block interaction.
+ * @param {boolean} [props.disabled]
  * @param {string} [props.iconClassName]
  * @param {string} [props.className]
  * @param {(e: import('react').MouseEvent) => void} [props.onClick]
  * @param {'button'|'submit'|'reset'} [props.type]
  */
 export const IconButton = forwardRef(function IconButton(
-  { icon, tone, variant, size = 'md', label, ariaLabel, tooltip, iconClassName = '', className = '', onClick, type = 'button', ...rest },
+  { icon, tone, variant, size = 'md', label, ariaLabel, tooltip, loading = false, disabled = false, iconClassName = '', className = '', onClick, type = 'button', ...rest },
   ref,
 ) {
   const resolvedTone = resolveTone(tone, variant);
   const glyph = GLYPH[size] || GLYPH.md;
+  const inert = disabled || loading;
 
   const lastClickRef = useRef(0);
   const handleClick = useCallback(
@@ -78,7 +82,9 @@ export const IconButton = forwardRef(function IconButton(
   // detect the element case and render everything else as <Icon/>.
   const Icon = icon;
   let renderedIcon = null;
-  if (isValidElement(icon)) {
+  if (loading) {
+    renderedIcon = <Spinner size="inherit" color="current" className={cx(glyph, 'border-2')} />;
+  } else if (isValidElement(icon)) {
     renderedIcon = (
       <span className={cx('inline-flex items-center justify-center', glyphClass)} aria-hidden="true">
         {icon}
@@ -94,6 +100,8 @@ export const IconButton = forwardRef(function IconButton(
       type={type}
       title={tooltip}
       aria-label={ariaLabel || label || tooltip}
+      aria-busy={loading || undefined}
+      disabled={inert}
       onClick={handleClick}
       className={cx(
         'group/iconbtn flex items-center justify-center rounded-2xl border transition-all hover:scale-[1.04] active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 disabled:cursor-not-allowed disabled:opacity-55 disabled:hover:scale-100 motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100',
