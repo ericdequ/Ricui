@@ -31,5 +31,8 @@
   "license": "MIT",
   "files": [
     "src"
-  ]
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
 }
