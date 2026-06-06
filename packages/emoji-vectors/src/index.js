@@ -14,7 +14,7 @@
 // type *before* it is vector-embedded here.
 // =============================================================================
 
-import { emojiName } from './names.js';
+import { emojiGroup, emojiName } from './names.js';
 import { algorithmicName } from './unicode.js';
 
 const DEFAULT_FALLBACK_DIMENSIONS = 32;
@@ -115,16 +115,27 @@ export const describeEmojiGlyph = (emoji) => {
   };
 };
 
-/** The text fed to an embeddings model to upgrade a glyph from fallback. */
+/**
+ * The text fed to an embeddings model to upgrade a glyph from the fallback.
+ *
+ * Folds the DISTINCTIVE meaning — canonical CLDR name, category/group, and any
+ * curated type/vibe — and drops the boilerplate the old version shared across
+ * every glyph (`Codepoints …`, `Use as a compact symbol …`). Shared phrasing
+ * pushes every embedding toward a common direction, inflating the baseline
+ * cosine; trimming it widens the margins at bake time, complementing the
+ * mean-centering in `./center`. Re-run `npm run bake` after changing this.
+ */
 export const buildEmojiEmbeddingText = (emoji) => {
   const d = describeEmojiGlyph(emoji);
+  const curated = EMOJI_MEANINGS[emoji];
   return [
-    `Emoji ${d.emoji}`,
-    `Codepoints ${d.codepoints.join(' ')}`,
-    `Type ${d.type}`,
-    `Emotion and vibe meaning: ${d.emotion}`,
-    `Use as a compact human and machine readable symbol for Time Space Type indexing.`,
-  ].join('. ');
+    d.label, // CLDR/curated name, or composed "pin + clinking beers"
+    emojiGroup(emoji) && `category: ${emojiGroup(emoji)}`,
+    curated && `used for ${curated.type}`,
+    curated?.emotion && curated.emotion !== d.label && curated.emotion,
+  ]
+    .filter(Boolean)
+    .join('. ');
 };
 
 export const normalizeVector = (vector) => {

@@ -157,8 +157,6 @@ Regenerate from the UCD (Unicode 17.0): `npm run build-unicode` (names) · `npm 
 
 Gaps to close as this gets used (extend the lib, don't work around it):
 
-- **Leaner embedding text.** `buildEmojiEmbeddingText` shares boilerplate across
-  glyphs, raising the baseline similarity; embed only the distinctive meaning.
 - **Named, interpretable axes.** Offer a small hand-tuned basis
   (energy/social/intimacy/novelty/activity) as an alternative to opaque dims.
 - **Compositional roles.** `📍🍺` = bar-spot vs `👬🍺` = friend check-in: parse by

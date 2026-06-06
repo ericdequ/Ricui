@@ -3,6 +3,7 @@ import test from 'node:test';
 
 import {
   buildEmojiComparisons,
+  buildEmojiEmbeddingText,
   buildEmojiVectorItems,
   codepointsForGlyph,
   cosineSimilarity,
@@ -21,6 +22,20 @@ test('codepointsForGlyph: 🍺 → U+1F37A, 🍻 → U+1F37B', () => {
 test('parseEmojiInput: splits + de-dupes graphemes and tokens', () => {
   assert.deepEqual(parseEmojiInput('🍺🍻🍺'), ['🍺', '🍻']);
   assert.deepEqual(parseEmojiInput('🍺, 🍻, ⛳'), ['🍺', '🍻', '⛳']);
+});
+
+test('buildEmojiEmbeddingText: distinctive (name + group), no shared boilerplate', () => {
+  const beer = buildEmojiEmbeddingText('🍺'); // curated
+  assert.match(beer, /beer/);
+  assert.match(beer, /category: Food & Drink/);
+  assert.match(beer, /used for bar/);
+  const pizza = buildEmojiEmbeddingText('🍕'); // named, not curated
+  assert.match(pizza, /pizza/);
+  assert.match(pizza, /category: Food & Drink/);
+  // The old boilerplate that inflated baseline cosine is gone.
+  for (const text of [beer, pizza]) {
+    assert.doesNotMatch(text, /Codepoints|compact human and machine|Time Space Type/);
+  }
 });
 
 test('describeEmojiGlyph: curated meaning + compositional string', () => {
