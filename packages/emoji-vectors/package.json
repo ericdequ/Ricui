@@ -11,11 +11,13 @@
     "./center": "./src/center.js",
     "./quantize": "./src/quantize.js",
     "./serve": "./src/serve.js",
-    "./react": "./src/react.jsx"
+    "./react": "./src/react.jsx",
+    "./names": "./src/names.js"
   },
   "scripts": {
     "bake": "node scripts/bake.mjs",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "build-names": "node scripts/build-names.mjs"
   },
   "dependencies": {
     "@ric/emoji": "^0.1.0"

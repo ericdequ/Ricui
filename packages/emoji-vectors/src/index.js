@@ -14,6 +14,8 @@
 // type *before* it is vector-embedded here.
 // =============================================================================
 
+import { emojiName } from './names.js';
+
 const DEFAULT_FALLBACK_DIMENSIONS = 32;
 const MAX_EMOJI_COUNT = 48;
 const EPSILON = 1e-12;
@@ -100,12 +102,13 @@ export const describeEmojiGlyph = (emoji) => {
   const composed = curated ? null : describeEmojiString(emoji);
   if (composed) return composed;
   const codepoints = codepointsForGlyph(emoji);
+  const name = emojiName(emoji); // canonical CLDR name, e.g. "pizza"
   return {
     emoji,
     codepoints,
-    label: curated?.label || codepoints.join(' '),
+    label: curated?.label || name || codepoints.join(' '),
     type: curated?.type || 'unicode-symbol',
-    emotion: curated?.emotion || `Unicode symbol ${codepoints.join(' ')}`,
+    emotion: curated?.emotion || name || `Unicode symbol ${codepoints.join(' ')}`,
   };
 };
 

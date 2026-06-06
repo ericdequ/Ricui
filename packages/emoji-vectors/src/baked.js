@@ -12,20 +12,50 @@ import { dequantizeTable } from './quantize.js';
 
 export { BAKED };
 
+const EMOJI_VECTORS_CACHE = 'ric-emoji-vectors-v1';
+
+const decodeTable = (table) =>
+  table?.quantization === 'int8' ? dequantizeTable(table) : table;
+
 /**
  * Fetch a baked table from an endpoint (e.g. robotric.org's internal emoji-
- * vectors API), dequantizing int8 → float. Returns a table for `semanticEmojiVector({table})`.
+ * vectors API), dequantizing int8 → float. Persists the response in the Cache
+ * API (browser) so the multi-MB table is fetched ONCE per device, then served
+ * offline — the bundle never carries it. No-ops the cache gracefully where the
+ * Cache API is absent (node/SSR). Returns a table for `semanticEmojiVector({table})`.
  * @param {string} url
- * @param {{ token?: string, fetchImpl?: typeof fetch }} [opts]
+ * @param {{ token?: string, fetchImpl?: typeof fetch, cache?: boolean }} [opts]
  */
-export const fetchBakedVectors = async (url, { token, fetchImpl = fetch } = {}) => {
-  const res = await fetchImpl(
-    url,
-    token ? { headers: { authorization: `Bearer ${token}` } } : undefined
-  );
+export const fetchBakedVectors = async (
+  url,
+  { token, fetchImpl = fetch, cache = true } = {}
+) => {
+  const headers = token ? { authorization: `Bearer ${token}` } : undefined;
+  const canCache = cache && typeof caches !== 'undefined';
+
+  if (canCache) {
+    try {
+      const store = await caches.open(EMOJI_VECTORS_CACHE);
+      const hit = await store.match(url);
+      if (hit) return decodeTable(await hit.json());
+    } catch {
+      /* cache unavailable — fall through to network */
+    }
+  }
+
+  const res = await fetchImpl(url, headers ? { headers } : undefined);
   if (!res.ok) throw new Error(`emoji-vectors fetch ${res.status}`);
-  const table = await res.json();
-  return table?.quantization === 'int8' ? dequantizeTable(table) : table;
+
+  if (canCache && typeof res.clone === 'function') {
+    try {
+      const store = await caches.open(EMOJI_VECTORS_CACHE);
+      await store.put(url, res.clone());
+    } catch {
+      /* best-effort cache write */
+    }
+  }
+
+  return decodeTable(await res.json());
 };
 
 /** True once a real bake has populated the table. */
