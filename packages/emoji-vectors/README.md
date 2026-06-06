@@ -164,4 +164,7 @@ Gaps to close as this gets used (extend the lib, don't work around it):
   role (place/container/event/actor) so a string decodes to a structured signal —
   e.g. a BLE-header-sized payload.
 - **Multi-codepoint glyphs / ZWJ sequences** in `codepointsForGlyph` round-trips.
-- **Cross-language parity** with a `@ric/tst`-style golden fixture if a Go port lands.
+
+A Go port (`BEV/GO/get`) mirrors `describe`/`prompt`/fallback-vector and is pinned
+to this lib by a golden fixture (`GO/get/testdata/parity.json`, regenerated from
+the canonical JS), so the two implementations cannot silently drift.

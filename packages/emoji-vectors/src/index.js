@@ -29,9 +29,9 @@ export const DEFAULT_DIMENSIONS = DEFAULT_FALLBACK_DIMENSIONS;
 export const EMOJI_MEANINGS = Object.freeze({
   '🍺': { label: 'beer', type: 'bar', emotion: 'casual nightlife refreshment' },
   '🍻': { label: 'clinking beers', type: 'meetup', emotion: 'shared drink meetup celebration' },
-  '🍽️': { label: 'dining', type: 'restaurant', emotion: 'shared meal sit-down' },
-  '☕': { label: 'coffee', type: 'cafe', emotion: 'calm focus daytime chat' },
-  '⛳': { label: 'golf flag', type: 'golf', emotion: 'active leisure open-air play' },
+  '🍽️': { label: 'restaurant', type: 'restaurant', emotion: 'shared meal dining place' },
+  '☕': { label: 'cafe', type: 'cafe', emotion: 'coffee calm daytime chat' },
+  '⛳': { label: 'golf', type: 'golf', emotion: 'golf leisure outdoor play' },
   '🎸': { label: 'guitar', type: 'live-music', emotion: 'live music energy performance' },
   '😂': { label: 'laughing', type: 'emotion', emotion: 'funny joy release' },
   '😄': { label: 'smile', type: 'emotion', emotion: 'open happy welcome' },
@@ -41,7 +41,7 @@ export const EMOJI_MEANINGS = Object.freeze({
   '💃': { label: 'dancing', type: 'vibe', emotion: 'dance movement nightlife spark' },
   '💬': { label: 'chat', type: 'message', emotion: 'conversation social signal' },
   '📸': { label: 'camera flash', type: 'photo', emotion: 'captured memory visible moment' },
-  '📍': { label: 'pin', type: 'place', emotion: 'here now place anchor' },
+  '📍': { label: 'pin', type: 'presence', emotion: 'here now place anchor' },
   '👬': { label: 'two people', type: 'friend', emotion: 'friends together presence check-in' },
   '✨': { label: 'sparkles', type: 'vibe', emotion: 'magic polish bright potential' },
 });
