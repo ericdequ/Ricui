@@ -32,9 +32,14 @@ export const fetchBakedVectors = async (url, { token, fetchImpl = fetch } = {}) 
 export const isBaked = (table = BAKED) =>
   Object.keys(table?.vectors || {}).length > 0;
 
-/** The baked vector for a glyph, or null if not in the table. */
+// Tolerate emoji-presentation variation selectors (U+FE0F/U+FE0E): the bake keys
+// glyphs by base codepoint, so "🍽️" resolves to "🍽".
+const stripVariation = (glyph) =>
+  String(glyph || '').replace(/[\uFE0E\uFE0F]/g, '');
+
+/** The baked vector for a glyph (variation-selector tolerant), or null. */
 export const bakedVector = (emoji, table = BAKED) =>
-  table?.vectors?.[emoji] || null;
+  table?.vectors?.[emoji] || table?.vectors?.[stripVariation(emoji)] || null;
 
 const splitGlyphs = (input) =>
   typeof Intl !== 'undefined' && Intl.Segmenter

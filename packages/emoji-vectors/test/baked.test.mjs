@@ -16,6 +16,13 @@ const mock = {
   },
 };
 
+test('bakedVector tolerates emoji-presentation variation selectors (🍽️ → 🍽)', () => {
+  const table = { dimensions: 2, vectors: { '🍽': [1, 0] } };
+  assert.deepEqual(bakedVector('🍽️', table), [1, 0], 'FE0F stripped to base glyph');
+  assert.deepEqual(bakedVector('🍽', table), [1, 0], 'base glyph still resolves');
+  assert.equal(bakedVector('🦄', table), null, 'genuinely-absent glyph → null');
+});
+
 test('an empty table reports not-baked and falls back to the 32-d space', () => {
   const empty = { dimensions: 0, vectors: {} };
   assert.equal(isBaked(empty), false);
