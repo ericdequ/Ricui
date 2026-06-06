@@ -21,6 +21,7 @@ import {
   normalizeVector,
 } from '../src/index.js';
 import { centerTable } from '../src/center.js';
+import { EMOJI_NAMES } from '../src/names.js';
 import { quantizeTable } from '../src/quantize.js';
 
 const arg = (flag, fallback) => {
@@ -37,22 +38,10 @@ const QUANTIZE = arg('--quantize', '') === 'int8';
 const API_KEY = process.env.OPENAI_API_KEY || arg('--api-key', '');
 const OUT = fileURLToPath(new URL('../src/baked.data.js', import.meta.url));
 
-// Dependency-free enumeration of the emoji vocabulary via the Unicode
-// Extended_Pictographic property over the blocks emoji actually live in.
-const enumerateEmoji = () => {
-  const out = new Set();
-  const ranges = [
-    [0x1f000, 0x1faff], [0x1f900, 0x1f9ff], [0x2600, 0x27bf],
-    [0x2300, 0x23ff], [0x2b00, 0x2bff], [0x2190, 0x21ff], [0x25a0, 0x25ff],
-  ];
-  for (const [start, end] of ranges) {
-    for (let cp = start; cp <= end; cp += 1) {
-      const ch = String.fromCodePoint(cp);
-      if (/\p{Extended_Pictographic}/u.test(ch)) out.add(ch);
-    }
-  }
-  return [...out];
-};
+// The canonical vocabulary is the named emoji set (src/names.data.js): every
+// glyph has a CLDR name, so buildEmojiEmbeddingText emits semantic text and the
+// baked table lines up 1:1 with the names registry. Run `npm run build-names` first.
+const enumerateEmoji = () => Object.keys(EMOJI_NAMES);
 
 const emojisArg = arg('--emojis', '');
 const EMOJIS = emojisArg
