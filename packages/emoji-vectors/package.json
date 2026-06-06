@@ -12,12 +12,14 @@
     "./quantize": "./src/quantize.js",
     "./serve": "./src/serve.js",
     "./react": "./src/react.jsx",
-    "./names": "./src/names.js"
+    "./names": "./src/names.js",
+    "./unicode": "./src/unicode.js"
   },
   "scripts": {
     "bake": "node scripts/bake.mjs",
     "test": "node --test test/*.test.mjs",
-    "build-names": "node scripts/build-names.mjs"
+    "build-names": "node scripts/build-names.mjs",
+    "build-unicode": "node scripts/build-unicode.mjs"
   },
   "dependencies": {
     "@ric/emoji": "^0.1.0"

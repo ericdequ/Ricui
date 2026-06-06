@@ -127,6 +127,32 @@ to skip): embedding models compress every cosine into a narrow high band, so
 subtracting the global mean direction widens the margins (🍺~🍻 0.88→0.57,
 🍺~⛳ 0.83→0.32) while preserving ranking.
 
+## Names — global meaning, tiered for the whole code-point space
+
+A name for *any* code point, sized by **store only what can't be derived**:
+
+| layer | covers | size | how |
+|---|---|---|---|
+| emoji names (`./names`) | ~1.9k emoji | ~18 KB gz, bundled | CLDR names + group |
+| algorithmic (`./unicode`) | ~120k chars (CJK, Hangul, …) | **~0.8 KB** bundled | a *rule*, not a table |
+| explicit (`./unicode`, lazy) | ~40k named chars | ~265 KB gz, `loadUnicodeNames()` | UCD table, dynamic-imported |
+| vectors (`./baked`) | the meaningful subset (emoji) | ~518 KB gz, **fetched + cached** | never bundled |
+
+```js
+import { algorithmicName, unicodeName, describeCodepoint, loadUnicodeNames } from '@ric/emoji-vectors/unicode';
+algorithmicName('中');            // 'CJK UNIFIED IDEOGRAPH-4E2D'  (no data loaded)
+algorithmicName('김');            // 'HANGUL SYLLABLE GIM'         (derived, no data)
+const names = await loadUnicodeNames();
+unicodeName('a', { names });      // 'LATIN SMALL LETTER A'        (lazy explicit table)
+describeCodepoint('✓', { names }); // { hex:'U+2713', name:'CHECK MARK', source:'explicit', … }
+```
+
+Regenerate from the UCD (Unicode 17.0): `npm run build-unicode` (names) · `npm run build-names` (emoji).
+
+> Vectors stay scoped to the *meaningful* subset — embedding all ~160k assigned
+> chars would be ~41 MB of mostly-useless vectors. Names cover everything; vectors
+> cover what's worth comparing.
+
 ## Improving
 
 Gaps to close as this gets used (extend the lib, don't work around it):

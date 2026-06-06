@@ -15,6 +15,7 @@
 // =============================================================================
 
 import { emojiName } from './names.js';
+import { algorithmicName } from './unicode.js';
 
 const DEFAULT_FALLBACK_DIMENSIONS = 32;
 const MAX_EMOJI_COUNT = 48;
@@ -102,7 +103,9 @@ export const describeEmojiGlyph = (emoji) => {
   const composed = curated ? null : describeEmojiString(emoji);
   if (composed) return composed;
   const codepoints = codepointsForGlyph(emoji);
-  const name = emojiName(emoji); // canonical CLDR name, e.g. "pizza"
+  // CLDR emoji name, else the algorithmic Unicode name (CJK/Hangul/…) — both
+  // sync + bundled. Full explicit non-emoji names load via @ric/.../unicode.
+  const name = emojiName(emoji) || algorithmicName(emoji);
   return {
     emoji,
     codepoints,
