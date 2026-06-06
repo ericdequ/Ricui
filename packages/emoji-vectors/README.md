@@ -29,6 +29,7 @@ import {
 
 emojiSimilarity('🍺', '🍻');   // ~ high (both drinking/social)
 describeEmojiGlyph('📍🍻');     // { type:'emoji-string', components:[pin, meetup], ... }
+buildEmojiVectorItems({ emojis, vectors, includeVector: false }); // plot, drop full vectors
 ```
 
 Vectors come from a deterministic **codepoint-wave fallback** (open-vocabulary,

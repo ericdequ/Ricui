@@ -38,6 +38,16 @@ test('buildEmojiEmbeddingText: distinctive (name + group), no shared boilerplate
   }
 });
 
+test('buildEmojiVectorItems: includeVector controls payload, keeps preview + direction', () => {
+  const emojis = ['🍺', '🍻', '⛳'];
+  const full = buildEmojiVectorItems({ emojis });
+  assert.ok(Array.isArray(full[0].vector), 'full vector by default');
+  const lean = buildEmojiVectorItems({ emojis, includeVector: false });
+  assert.equal(lean[0].vector, undefined, 'vector dropped when includeVector:false');
+  assert.ok(Array.isArray(lean[0].vectorPreview), 'preview kept');
+  assert.equal(typeof lean[0].direction.x, 'number', 'direction still projected');
+});
+
 test('describeEmojiGlyph: curated meaning + compositional string', () => {
   assert.equal(describeEmojiGlyph('🍺').type, 'bar');
   const composed = describeEmojiGlyph('📍🍻');

@@ -242,6 +242,11 @@ export const projectVectors2d = (items) => {
 /**
  * Build plottable items for a set of emojis. Pass `vectors` (model embeddings,
  * index-aligned) to upgrade from the fallback; omit for the deterministic space.
+ *
+ * `includeVector` (default true) keeps the full per-item `vector`; pass false to
+ * drop it from the result while keeping `vectorPreview` + the projected
+ * `direction` — for API responses that plot but shouldn't ship every dimension.
+ * The vector is always used internally to project, then stripped afterward.
  */
 export const buildEmojiVectorItems = ({
   emojis,
@@ -249,6 +254,7 @@ export const buildEmojiVectorItems = ({
   provider = 'deterministic-fallback',
   model = 'unicode-codepoint-wave-v1',
   dimensions = DEFAULT_FALLBACK_DIMENSIONS,
+  includeVector = true,
 } = {}) => {
   const base = (emojis || []).map((emoji, i) => {
     const vector = normalizeVector(vectors[i] || emojiVector(emoji, { dimensions }));
@@ -261,7 +267,10 @@ export const buildEmojiVectorItems = ({
       vector,
     };
   });
-  return projectVectors2d(base);
+  const projected = projectVectors2d(base); // needs `vector` to compute direction
+  return includeVector
+    ? projected
+    : projected.map(({ vector, ...item }) => item);
 };
 
 /** All unique pairwise cosine comparisons across plottable items. */
