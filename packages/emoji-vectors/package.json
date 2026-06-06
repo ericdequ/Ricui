@@ -1,17 +1,24 @@
 {
-  "name": "@ric/icons",
+  "name": "@ric/emoji-vectors",
   "version": "0.1.0",
   "type": "module",
+  "description": "Emoji ↔ unicode ↔ feature-vector space: ground a symbol in a small semantic vector, compose emoji strings, compare by cosine, and project to 2-D for visualization. Extends @ric/emoji.",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
+    "./baked": "./src/baked.js",
+    "./catalog": "./src/catalog.js",
+    "./center": "./src/center.js",
+    "./quantize": "./src/quantize.js",
+    "./serve": "./src/serve.js",
     "./react": "./src/react.jsx"
   },
   "scripts": {
+    "bake": "node scripts/bake.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
-    "@ric/emoji-vectors": "^0.1.0"
+    "@ric/emoji": "^0.1.0"
   },
   "peerDependencies": {
     "react": ">=18"
@@ -27,10 +34,11 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ericdequ/Ricui.git",
-    "directory": "packages/icons"
+    "directory": "packages/emoji-vectors"
   },
   "license": "MIT",
   "files": [
-    "src"
+    "src",
+    "scripts"
   ]
 }

@@ -17,7 +17,16 @@ export { accessibilityBaseline, components, cx, toneChipClass } from '@ric/ui-co
 
 // Icons + emoji catalogs
 export { emojiCatalog, getEmoji } from '@ric/emoji';
-export { iconography } from '@ric/icons';
+export {
+  describeIcon,
+  describeUnicodeIcon,
+  iconMetadata,
+  iconography,
+  iconSimilarity,
+  iconVector,
+  iconVectorItems,
+  listIcons,
+} from '@ric/icons';
 
 // Domain contracts (node-safe — enums, registries, formatters)
 export * from '@ric/chat';

@@ -13,6 +13,8 @@ adapter.
 - `@ric/ui-core` — generic primitives: `Pill`, `Badge`, `IconButton`, `Card`, `StatusDot` (`@ric/ui-core/react`)
 - `@ric/icons` — shared icon catalog
 - `@ric/emoji` — unicode emoji catalog used as semantic icons
+- `@ric/emoji-vectors` — open-vocabulary Unicode emoji descriptions,
+  deterministic fallback vectors, similarity, and 2-D projection helpers
 
 **Domain (place-agnostic)**
 

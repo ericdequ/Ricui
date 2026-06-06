@@ -7,6 +7,7 @@
 // =============================================================================
 
 export * from '@ric/chat/react';
+export * from '@ric/icons/react';
 export * from '@ric/meetups/react';
 export * from '@ric/places/react';
 export * from '@ric/ui-core/react';
