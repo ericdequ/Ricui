@@ -24,7 +24,9 @@ test('icon metadata includes Unicode description and baked-aware vector preview'
   );
   assert.equal(nightlife.vector.baked, isBaked());
   assert.equal(nightlife.vector.preview.length, 12);
-  assert.match(nightlife.vector.embeddingText, /Emoji 🍸/);
+  // Lean embedding text: CLDR name + category, no boilerplate (see @ric/emoji-vectors).
+  assert.match(nightlife.vector.embeddingText, /cocktail glass/);
+  assert.doesNotMatch(nightlife.vector.embeddingText, /Emoji |Codepoints/);
 });
 
 test('icon vectors are deterministic and identity similarity is 1', () => {
@@ -51,7 +53,8 @@ test('describeUnicodeIcon supports arbitrary full-Unicode glyphs', () => {
   assert.deepEqual(compass.unicode.codepoints, ['U+1F9ED']);
   assert.equal(compass.vector.preview.length, 12);
   assert.equal(compass.vector.baked, isBaked());
-  assert.match(compass.vector.embeddingText, /Emoji 🧭/);
+  assert.match(compass.vector.embeddingText, /compass/);
+  assert.doesNotMatch(compass.vector.embeddingText, /Emoji |Codepoints/);
 });
 
 test('metadata covers the full current iconography catalog', () => {

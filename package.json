@@ -10,7 +10,7 @@
   "scripts": {
     "check:imports": "node ./scripts/verify-imports.mjs",
     "check:map-ui": "node ./scripts/verify-map-ui.mjs",
-    "test": "node ./scripts/verify-imports.mjs && node ./scripts/verify-map-ui.mjs",
+    "test": "node ./scripts/verify-imports.mjs && node ./scripts/verify-map-ui.mjs && npm test --workspaces --if-present",
     "publish:all": "node ./scripts/publish.mjs"
   }
 }
