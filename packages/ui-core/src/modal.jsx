@@ -43,12 +43,14 @@ const POSITION_PANEL = {
   fullscreen: 'rounded-none border-0 shadow-none',
 };
 
-const POSITION_MAX_H = {
-  center: 'max-h-[calc(var(--viewport-height)-max(var(--app-safe-top),0.75rem)-max(var(--app-safe-bottom),1rem)-1rem)]',
-  bottom: 'max-h-[calc(var(--viewport-height)-max(var(--app-safe-top),0.75rem)-max(var(--app-safe-bottom),0.5rem)-1rem)]',
-  top: 'max-h-[calc(var(--viewport-height)-max(var(--app-safe-top),1rem)-max(var(--app-safe-bottom),1rem)-2rem)]',
-  fullscreen: 'h-[100dvh] max-h-[100dvh]',
-};
+// Panel height bound. Non-fullscreen panels cap at `max-h-full` = 100% of the
+// overlay's content box (the overlay is fixed inset-0 → definite viewport
+// height, already minus safe-area + position padding). This guarantees the
+// panel never exceeds the visible area regardless of safe-area math or whether
+// the JS-set `--viewport-height` custom property is present, so the shrink-0
+// header/close stays reachable and the flex-1 body scrolls internally.
+// Fullscreen keeps an explicit full-viewport height so it can stretch edge-to-edge.
+const FULLSCREEN_HEIGHT = 'h-[100dvh] max-h-[100dvh]';
 
 const POSITION_PANEL_SELF = {
   center: 'self-center',
@@ -197,7 +199,9 @@ export function Modal({
   if (!mounted || typeof window === 'undefined' || typeof document === 'undefined') return null;
 
   const labelledById = title ? 'ric-modal-title' : undefined;
-  const heightClass = panelHeightClass || `!h-auto ${POSITION_MAX_H[position] || POSITION_MAX_H.center}`;
+  const heightClass =
+    panelHeightClass ||
+    (position === 'fullscreen' ? FULLSCREEN_HEIGHT : '!h-auto max-h-full');
   const sizeClass = position === 'fullscreen' ? 'w-full' : `w-full ${SIZE_MAX_WIDTH[size] || SIZE_MAX_WIDTH.md}`;
   const safePadClass = position === 'fullscreen' ? '' : 'safe-top-pad safe-bottom-pad';
   const backdropInteractive = backdrop !== 'none' && closeOnBackdrop;
