@@ -9,10 +9,11 @@
     "./styles.css": "./src/styles.css"
   },
   "dependencies": {
-    "@ric/ui-tokens": "^0.1.0"
+    "@ric/ui-tokens": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18",
+    "react-dom": ">=18",
     "react-virtuoso": ">=4"
   },
   "peerDependenciesMeta": {

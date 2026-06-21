@@ -22,7 +22,7 @@
     "build-unicode": "node scripts/build-unicode.mjs"
   },
   "dependencies": {
-    "@ric/emoji": "^0.1.0"
+    "@ric/emoji": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18"

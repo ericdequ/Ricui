@@ -8,9 +8,8 @@
     "./react": "./src/react.jsx"
   },
   "dependencies": {
-    "@ric/places": "^0.1.0",
-    "@ric/ui-core": "^0.1.0",
-    "@ric/ui-tokens": "^0.1.0"
+    "@ric/places": "workspace:*",
+    "@ric/ui-core": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18"

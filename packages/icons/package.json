@@ -11,7 +11,7 @@
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
-    "@ric/emoji-vectors": "^0.1.0"
+    "@ric/emoji-vectors": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18"
